@@ -1,11 +1,26 @@
-# Site settings
-title: もふもふ技術ブログ
-email: your-email@domain.com
-description: もふもふしながら技術を蓄えるブログ
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
+permalink: /:categories/:title.html
+url: "http://mofmof.github.io/"
+blog_title: "もふもふ技術部"
+author:
+  name: HOGE
+authors:
+  aharada:
+    name: "原田 敦"
+    img_name_path: "/images/users/user.jpg"
+    aboutme: "「作って人をしあわせにする」ことがミッション。多くの人を幸せにするプロダクトを世に送り出すことが、クリエイターにとって至上の幸せだと思ってます。デスマを憎んで人を憎まず。よりよいソフトウェアは、よりよいチームから生まれると思ってます。"
+  stachibana:
+    name: "橘 周世"
+    img_name_path: "/images/users/user.jpg"
+    aboutme: "作るのとパソコンをいじるのが大好きなエンジニア。Webで誰もが気軽にお金や価値を生み出す世界を夢見ている。システムは使ってなんぼ。使う人誰もが最大の価値を生み出し、気持ち良く使ってもらえるシステムを常に目指していきます。"
+  tishii:
+    name: "石井 智康"
+    img_name_path: "/images/users/user.jpg"
+    aboutme: "旅をこよなく愛する雑食系エンジニア。認定スクラムマスター。「楽しく作る」を極めたい。エンジニアの世界とビジネスの世界（非ITの世界）を幸せにつなげていくことをテーマに活動をしています。"
 
-# Build settings
-markdown: kramdown
+disqus_shortname: ""
+copyright_year: "2015"
+google_analytics_code: ""
+twitter: ""
+github: "mofmof"
+facebook: ""
+linkined_url: ""
