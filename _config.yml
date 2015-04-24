@@ -1,21 +1,25 @@
 permalink: /:categories/:title.html
-url: "http://mofmof.github.io/"
+url: "http://tech.mof-mof.co.jp/"
 blog_title: "もふもふ技術部"
 author:
   name: HOGE
 authors:
   aharada:
     name: "原田 敦"
-    img_name_path: "/images/users/user.jpg"
+    img_name_path: "/images/users/aharada.jpg"
     aboutme: "「作って人をしあわせにする」ことがミッション。多くの人を幸せにするプロダクトを世に送り出すことが、クリエイターにとって至上の幸せだと思ってます。デスマを憎んで人を憎まず。よりよいソフトウェアは、よりよいチームから生まれると思ってます。"
   stachibana:
     name: "橘 周世"
-    img_name_path: "/images/users/user.jpg"
+    img_name_path: "/images/users/stachibana.jpg"
     aboutme: "作るのとパソコンをいじるのが大好きなエンジニア。Webで誰もが気軽にお金や価値を生み出す世界を夢見ている。システムは使ってなんぼ。使う人誰もが最大の価値を生み出し、気持ち良く使ってもらえるシステムを常に目指していきます。"
   tishii:
     name: "石井 智康"
-    img_name_path: "/images/users/user.jpg"
+    img_name_path: "/images/users/tishii.jpg"
     aboutme: "旅をこよなく愛する雑食系エンジニア。認定スクラムマスター。「楽しく作る」を極めたい。エンジニアの世界とビジネスの世界（非ITの世界）を幸せにつなげていくことをテーマに活動をしています。"
+  knishiyama:
+    name: "西山 歓司"
+    img_name_path: "/images/users/knishiyama.jpg"
+    aboutme: "大手企業でSEOの知識を習得後、大規模サイトの構築、運用業務に携わり、デザイン事務所へ転職。デザインを学びながら人生模索しながら今にいたる。特技としてマウスとキーボードを駆使して、パソコンを使うことができます。"
 
 disqus_shortname: ""
 copyright_year: "2015"
