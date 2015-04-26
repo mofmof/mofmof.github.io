@@ -2,7 +2,7 @@
 layout: blog
 title: 【入門】テキストをアスキーアートに変換するAtomのplugin(package)を作ってみる
 tags: [Atom]
-category: editor
+category: blog
 summary: 入門】テキストをアスキーアートに変換するAtomのplugin(package)を作ってみる
 author: aharada
 ---
@@ -112,6 +112,6 @@ coffeeで書けるのめちゃいいね。jsでplugin書けるって聞いてた
 
 適当なテキストを入力して`control + alt + a`を押してみましょう。こんな感じになれば成功！
 
-![](./images/blog/atom_package.png)
+![](../images/blog/atom_package.png)
 
 簡単！
