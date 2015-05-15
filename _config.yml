@@ -28,3 +28,8 @@ twitter: ""
 github: "mofmof"
 facebook: ""
 linkined_url: ""
+kramdown:
+  input: GFM
+#markdown: redcarpet
+#redcarpet:
+#  extensions: [tables,autolink,strikethrough]
