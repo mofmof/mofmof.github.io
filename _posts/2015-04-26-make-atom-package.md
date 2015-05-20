@@ -3,7 +3,7 @@ layout: blog
 title: 【入門】テキストをアスキーアートに変換するAtomのplugin(package)を作ってみる
 tags: [Atom]
 category: blog
-summary: 入門】テキストをアスキーアートに変換するAtomのplugin(package)を作ってみる
+summary: 【入門】テキストをアスキーアートに変換するAtomのplugin(package)を作ってみる
 author: aharada
 ---
 
@@ -43,7 +43,9 @@ $ tree
 
 自動生成コードをざくっと削除して、こんな感じにします。
 
-```lib/ascii-art.coffee
+lib/ascii-art.coffee
+
+```
 AsciiArtView = require './ascii-art-view'
 {CompositeDisposable} = require 'atom'
 
@@ -64,7 +66,9 @@ ctrl-alt-cmd-lという超絶押しにくいショートカットでwindowをリ
 
 公式とは違うんだけどこういう風にしてみた。atom-workspaceのときにコマンドをactiveにするっていうことなのかな？
 
-```package.json
+package.json
+
+```
 "activationCommands": {
     "atom-workspace": ["ascii-art:toggle", "ascii-art:convert"]
   },
@@ -72,7 +76,9 @@ ctrl-alt-cmd-lという超絶押しにくいショートカットでwindowをリ
 
 キーバインドの設定。見ての通りですね。
 
-```keymaps/ascii-art.cson
+keymaps/ascii-art.cson
+
+```
 'atom-text-editor':
   'ctrl-alt-a': 'ascii-art:convert'
 ```
@@ -85,7 +91,9 @@ ctrl-alt-cmd-lという超絶押しにくいショートカットでwindowをリ
 ## アスキーアートに変換する処理を実装
 といってもアスキーアートに変換する処理そのものは既存の`figlet`パッケージを使わせていただきます。
 
-```package.json
+package.json
+
+```
 "dependencies": {
    "figlet": "1.0.8"
 }
@@ -95,7 +103,9 @@ ctrl-alt-cmd-lという超絶押しにくいショートカットでwindowをリ
 
 Hello, Worldって出てただけのところの処理を変更する。convert部分ですね。
 
-```lib/ascii-art.coffee
+lib/ascii-art.coffee
+
+```
   convert: ->
     editor = atom.workspace.getActivePaneItem()
     selection = editor.getLastSelection()
