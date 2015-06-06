@@ -14,7 +14,7 @@ author: aharada
 ## 開発フロー
 GitHub Flowをベースにして少しカスタマイズしたやり方を採用しています。  
 
-https://gist.github.com/Gab-km/3705015
+[https://gist.github.com/Gab-km/3705015](https://gist.github.com/Gab-km/3705015)
 
 PivotalTrackerで自分にアサインされているストーリーを確認し、開発着手時にStartボタンを押す。
 
@@ -67,7 +67,7 @@ pull requestを作成する。CIがグリーンであることを確認したら
 ![](../images/blog/2015-06-06-develop-flow/github04.png)
 
 
-pull requestのサンプル: https://github.com/mofmof/docs/pull/44
+pull requestのサンプル: [https://github.com/mofmof/docs/pull/449](https://github.com/mofmof/docs/pull/449)
 
 
 #### 補足
