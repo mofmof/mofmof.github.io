@@ -1,9 +1,9 @@
 ---
 layout: blog
-title: mofmof inc.の開発フローを公開
+title: mofmof inc.の開発フローを公開します
 tags: [Atom]
 category: blog
-summary: mofmof inc.の開発フローを公開
+summary: 前にもQiitaで趣味開発チームの開発フローを公開したことはあるのですが、今度は弊社(mofmof inc.)の開発フローを公開してみます。結構丁寧に書いたのでもし使えそうだったらそのまま使っていただいて大丈夫ですよ。
 author: aharada
 ---
 
