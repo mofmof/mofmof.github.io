@@ -17,7 +17,7 @@ author: aharada
 
 使い方はREADME参照。
 
-https://github.com/colszowka/simplecov
+[https://github.com/colszowka/simplecov](https://github.com/colszowka/simplecov)
 
 Gemfileに追記
 
