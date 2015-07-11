@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: 「Arduinoをはじめようキット」で高速にLチカする
+title: 「Arduinoをはじめようキット」で通常の3倍どころか通常の5倍速でチカチカさせる
 category: blog
 tags: [arduino]  
 summary: ご存知の通り、LチカとはLEDチカチカの略ですが、Amazonで売ってる「Arduinoをはじめようキット」でそこまで簡単にできるのでやってみました。
