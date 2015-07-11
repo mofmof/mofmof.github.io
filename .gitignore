@@ -1,5 +1,6 @@
 _site
 .sass-cache
 .ruby-gemset
+.ruby-version
 .DS_Store
 
