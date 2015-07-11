@@ -3,7 +3,7 @@ layout: blog
 title: 「Arduinoをはじめようキット」で高速にLチカかする
 category: blog
 tags: [arduino]  
-summary: ~~~~
+summary: ご存知の通り、LチカとはLEDチカチカの略ですが、Amazonで売ってる「Arduinoをはじめようキット」でそこまで簡単にできるのでやってみました。
 image:
 author: aharada
 ---
