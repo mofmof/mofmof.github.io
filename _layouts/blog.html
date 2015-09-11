@@ -38,6 +38,16 @@
 						<div> <span class='tag {{tag | downcase }}'>{{tag}}</span> </div>
 					{% endfor %}
 				</div>
+				<hr />
+				<div>
+          <h5>Links</h5>
+          <ul style="margin:0;padding-left:1.5em;list-style-type: square;list-style-position: outside;list-style-image: none;text-align:left;">
+          <li><a href="http://www.mof-mof.co.jp/" target="_blank">会社のホームページ</a>
+          <li><a href="http://blog.mof-mof.co.jp/" target="_blank">会社のブログ</a>
+          <li><a href="https://www.wantedly.com/companies/mof-mof" target="_blank">Wantedlyで仲間を募集しています!</a></li>
+          <li><a href="http://line.me/ti/p/%40bew9898j" target="_blank">LINE@でお気軽にご相談ください</a></li>
+          </ul>
+          </div>
 			</div>
 			<div id='page'>
 				<h1 id='page-title'>{{page.title}}</h1>
@@ -55,7 +65,19 @@
 				</div>
 
 				{{content}}
-
+				
+				<div class="ninja_onebutton">
+					<script type="text/javascript">
+					//<![CDATA[
+					(function(d){
+					if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_fa51a609479d0ef694d7d59dd1ef2d29)=='undefined'){
+									document.write("<sc"+"ript type='text\/javascript' src='http:\/\/omt.shinobi.jp\/b\/fa51a609479d0ef694d7d59dd1ef2d29'><\/sc"+"ript>");
+					}else{
+							window.NINJA_CO_JP_ONETAG_BUTTON_fa51a609479d0ef694d7d59dd1ef2d29.ONETAGButton_Load();}
+					})(document);
+					//]]>
+					</script><span class="ninja_onebutton_hidden" style="display:none;"></span><span style="display:none;" class="ninja_onebutton_hidden"></span>
+				</div>
 
 				<div>
 					{% include comment.html %}
