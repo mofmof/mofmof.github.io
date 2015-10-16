@@ -20,6 +20,10 @@ authors:
     name: "西山 歓司"
     img_name_path: "/images/users/knishiyama.jpg"
     aboutme: "大手企業でSEOの知識を習得後、大規模サイトの構築、運用業務に携わり、デザイン事務所へ転職。デザインを学びながら人生模索しながら今にいたる。特技としてマウスとキーボードを駆使して、パソコンを使うことができます。"
+  ysakuma:
+    name: "佐久間　祐太"
+    img_name_path: "/images/users/ysakuma.jpg"
+    aboutme: "水は苦手だけど海辺が好きな男です。前職は典型的SEなので、mofmofスタイルで刺激ある日々を送っています。家族には呆れられてますが、絶対に沖縄で暮らしてやる。"
 
 disqus_shortname: ""
 copyright_year: "2015"
@@ -33,3 +37,5 @@ kramdown:
 #markdown: redcarpet
 #redcarpet:
 #  extensions: [tables,autolink,strikethrough]
+
+exclude: [vendor]
