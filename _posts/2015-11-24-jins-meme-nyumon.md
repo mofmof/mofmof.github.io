@@ -8,14 +8,14 @@ author: aharada
 ---
 このあたりを参考にやっていきます。
 
-http://qiita.com/nisshiee/items/9ec409a35f4137e2a32e
-http://qiita.com/you_matz/items/4f0f83289cb5f4ee5980
+[http://qiita.com/nisshiee/items/9ec409a35f4137e2a32e](http://qiita.com/nisshiee/items/9ec409a35f4137e2a32e)
+[http://qiita.com/you_matz/items/4f0f83289cb5f4ee5980](http://qiita.com/you_matz/items/4f0f83289cb5f4ee5980)
 
 普段通りxcodeでプロジェクトを新規作成しておきます。
 
 まずはMEMEのSDKをダウンロード。
 
-https://developers.jins.com/ja/sdks/ios/
+[https://developers.jins.com/ja/sdks/ios/](https://developers.jins.com/ja/sdks/ios/)
 
 解凍後ディレクトリ内のframework/universal/MEMELib.frameworkをxcode上でドラッグ&ドロップしてプロジェクトに追加します。
 
@@ -40,7 +40,7 @@ Bridginging Headerファイルを作成するため、ファイル名をdummyと
 
 公式サイトから作成するアプリの認証コードを取得する。画面上で新しいアプリを作成するとコードが発行される。
 
-https://developers.jins.com/ja/apps/create/
+[https://developers.jins.com/ja/apps/create/](https://developers.jins.com/ja/apps/create/)
 
 AppDelegate.swiftにキー情報を実装。
 
