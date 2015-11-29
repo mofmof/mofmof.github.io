@@ -90,7 +90,15 @@ class ViewController: UIViewController, MEMELibDelegate {
 }
 ```
 
-JINS MEMEの公式アプリなので、MEMEとiOS端末を接続した上で、アプリを起動する。下記のようにコンソールにログが出力されれば成功！
+JINS MEMEの公式アプリで、MEMEとiOS端末を接続した上で、アプリを起動する。下記のようにコンソールにログが出力されれば成功！
 
 できた！！
 ![](../images/blog/2015-11-24-jins-meme-nyumon/meme3.png)
+
+## シミュレータではエラーになる
+
+```
+MEME Error: CoreBluetooth not correctly initialized !
+```
+
+シミュレータはBluetoothが使えないので、上記のようなエラーメッセージが出力されます。実機でテストしましょう。
