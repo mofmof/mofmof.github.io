@@ -2,7 +2,7 @@
 layout: blog
 title: Gofのデザインパターン、Adapterパターンの使いどころ
 category: blog
-tags: [デザインパターン Ruby Adapterパターン]  
+tags: [デザインパターン,Ruby,Adapterパターン]  
 summary: 今「増補改訂版Java言語で学ぶデザインパターン入門」というGoFのデザインパターンについて説明している入門書を読んでいます。
 author: aharada
 ---

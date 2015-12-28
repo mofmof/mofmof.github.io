@@ -2,7 +2,7 @@
 layout: blog
 title: JINS MEMEでリアルタイムにセンサーの値を取得してログに表示してみる
 category: blog
-tags: [JINS MEME iOS]  
+tags: [JINS MEME,iOS]  
 summary: 普段通りxcodeでプロジェクトを新規作成しておきます。まずはMEMEのSDKをダウンロード。
 image: /images/blog/2015-11-24-jins-meme-nyumon/meme-main.jpg
 author: aharada
