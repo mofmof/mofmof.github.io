@@ -4,6 +4,7 @@ title: 【機械学習入門】線形回帰と仮説関数
 category: blog
 tags: [機械学習,Coursera]  
 summary: 前回エントリで「教師あり学習」には「回帰問題」と「分類問題」という種類がある
+image: /images/blog/2015-12-29-machine-learning-linear/graph.png
 author: aharada
 ---
 
