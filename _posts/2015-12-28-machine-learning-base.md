@@ -13,17 +13,17 @@ author: aharada
 ざっと情報収集したところ、このエントリが大変参考になった。
 
 「数学を避けてきた社会人プログラマが機械学習の勉強を始める際の最短経路」  
-http://qiita.com/daxanya1/items/218f2e3b922142550ef9
+[http://qiita.com/daxanya1/items/218f2e3b922142550ef9](http://qiita.com/daxanya1/items/218f2e3b922142550ef9)
 
 まずは機械学習とはなんぞや？という疑問には以下スライドがよさ気。
 
 機械学習チュートリアル  
-http://www.slideshare.net/unnonouno/jubatus-casual-talks
+[http://www.slideshare.net/unnonouno/jubatus-casual-talks](http://www.slideshare.net/unnonouno/jubatus-casual-talks)
 
 独学だったらCourseraというオンライン講座で学習するのが鉄板ぽい(安心してください、無料です)。
 
 Coursera  
-https://www.coursera.org/
+[https://www.coursera.org/](https://www.coursera.org/)
 
 Machine Learning  
 Stanford University
