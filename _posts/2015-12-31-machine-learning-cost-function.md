@@ -3,8 +3,8 @@ layout: blog
 title: 線形回帰と目的関数(cost function)について
 category: blog
 tags: [機械学習,Coursera,Octave,cost function,目的関数]  
-summary: TODO
-image: TODO
+summary: おとといあたりに【機械学習入門】線形回帰と仮説関数というエントリを書きましたが、関連して目的関数(cost function)というものがあります。
+image: /images/blog/2015-12-31-machine-learning-cost-function/graph.png
 author: aharada
 ---
 
