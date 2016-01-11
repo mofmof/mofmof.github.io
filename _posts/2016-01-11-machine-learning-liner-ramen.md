@@ -70,6 +70,15 @@ ramenY.txt
 ```
 
 ## 正規方程式で学習させる
+正規方程式の実装。
+
+normalEqn.m
+
+```
+function [theta] = normalEqn(X, y)
+  theta = pinv(X' * X) * X' * y
+end
+```
 
 Octaveで下記を実行し、学習させる。
 
