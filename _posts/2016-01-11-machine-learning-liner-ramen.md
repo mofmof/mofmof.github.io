@@ -4,9 +4,11 @@ title: 機械学習で、ラーメン屋のレビュー件数から評価点が�
 category: blog
 tags: [機械学習,Coursera,Octave,線形回帰,正規方程式,Normal Equation]  
 summary: 前回、「最急降下法を実装して線形回帰のθの値を探索してみたけどうまくいかなかった」という記事を書きましたが、どうやらfeature scaling(feature normalization)を
-image: /images/blog/2016-01-11-machine-learning-liner-ramen/ramen.png
+image: /images/blog/2016-01-11-machine-learning-liner-ramen/ramen.jpg
 author: aharada
 ---
+
+![](../images/blog/2016-01-11-machine-learning-liner-ramen/ramen.jpg)
 
 データは[ラーメンデータベース](http://ramendb.supleks.jp/)で「渋谷」で検索した上位20件を使用した。
 
