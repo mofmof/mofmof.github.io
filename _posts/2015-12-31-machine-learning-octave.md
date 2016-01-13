@@ -17,6 +17,7 @@ Octaveは数値解析を目的にしたプログラミング言語で、機械�
 Courseraの解説にはdmgをダウンロードしてインストールしろって書いてあるけど華麗に無視して、Homebrewでインストールします。依存ライブラリが結構あるっぽくてかなり時間がかかりますが根気強く待ちます。
 
 ```
+$ brew tap homebrew/science
 $ brew install octave
 ```
 
