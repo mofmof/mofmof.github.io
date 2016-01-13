@@ -8,7 +8,7 @@ image: /images/blog/2015-07-11-arduino-led/led-green-thumb.jpg
 author: aharada
 ---
 
-![](../images/blog/2015-07-11-arduino-led/led-green.jpg)]
+![](../images/blog/2015-07-11-arduino-led/led-green.jpg)
 
 ## 「Arduinoをはじめようキット」で普通にLチカしてみる
 
