@@ -4,7 +4,7 @@ title: 無料SSLのLet's EncryptでNginxのSSLを設定したら衝撃的なま�
 category: blog
 tags: [Let's Encrypt,SSL,Nginx]  
 summary: 個人の趣味で作っている、夫婦のための自動ごはん予定お知らせサービス「GoHaaan」のSSL証明書がいつの間に期限切れになっていて使えなくなってた。。。
-image: /images/blog/2016-02-06-letsencrypt/gohaaan.png
+image: /images/blog/2016-02-06-letsencrypt/gohaaan2.png
 author: aharada
 ---
 
@@ -90,4 +90,4 @@ $ sudo service nginx start
 超簡単。
 GoHaaan復活したあああああ！
 
-![](../images/blog/2016-02-06-letsencrypt/gohaaan.png)
+![](../images/blog/2016-02-06-letsencrypt/gohaaan2.png)
