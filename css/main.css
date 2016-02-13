@@ -87,6 +87,7 @@ h1 {
 #logo {
 	float: left;
 	font-size: 40px;
+	margin-right: 20px;
 }
 
 #links a {
@@ -248,6 +249,31 @@ blockquote{
 
 .tag { background-color: #008080}
 
+#global ul{
+  padding-top: 20px;
+	padding-left: 0;
+}
+#global ul li{
+  display: inline-block;
+}
+#global ul li a {
+  color: #606068;
+  font-size: 14px;
+  line-height: 14px;
+  padding: 23px 15px;
+  text-transform: uppercase;
+  -webkit-transition: background .4s,border .4s,color .4s;
+  -moz-transition: background .4s,border .4s,color .4s;
+  -o-transition: background .4s,border .4s,color .4s;
+  transition: background .4s,border .4s,color .4s;
+  text-decoration: none;
+}
+
+#global ul li a:hover {
+  color: #F0F0F0;
+  background-color: #09c;
+}
+
 
 /****** Media Queries For Adaptive Layouts******/
 
@@ -326,5 +352,9 @@ only screen and (max-width: 600px) {
 
 	#page img {
 		width: 100%;
+	}
+
+	#global ul li a {
+	  padding: 23px 4px;
 	}
 }
