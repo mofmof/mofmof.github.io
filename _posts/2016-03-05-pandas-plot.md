@@ -16,13 +16,13 @@ author: nekikara
 
 今回のサンプルのIPython notebookはGistに登録してあります。
 
-[https://gist.github.com/nekikara/ce5a1c8b3a0578670919](IPython notebook)
+[IPython notebook](https://gist.github.com/nekikara/ce5a1c8b3a0578670919)
 
 ### 環境構築
 今回は、MacBook Proで試しています。使用したものはpyenv, virtualenv, pandas, numpy, matplotlibです。
 
 ### PandasでPlotしてみる
-pandasを使用したことがなかったので、[http://pandas.pydata.org/pandas-docs/stable/visualization.html#scatter-plot](公式ドキュメント)を確認してまずはプロットします。
+pandasを使用したことがなかったので[公式ドキュメント](http://pandas.pydata.org/pandas-docs/stable/visualization.html#scatter-plot)を確認してまずはプロットします。
 
 ```
 %matplotlib inline
