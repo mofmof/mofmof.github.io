@@ -1,13 +1,11 @@
 ---
 layout: blog
-title: mecabで形態素解析したものをマッピングオブジェクトに突っ込む
+title: Pythonで言語処理100本ノックの8章を少しだけやってみる
 category: blog
-tags: [機械学習,machine learning,mecab,形態素解析]  
-summary: 機械学習に絶賛ハマり中の原田です。機械学習でこんなあんなことやことできないかなーって色々考えるのですが、
+tags: [機械学習,machine learning,ストップワード,言語処理100本ノック]  
+summary: 前回に続けて文章を機械学習のインプットにしたいので、文章解析処理を学習するため「言語処理100本ノック」をやります。
 author: aharada
 ---
-http://www.cl.ecei.tohoku.ac.jp/nlp100/
-
 前回に続けて文章を機械学習のインプットにしたいので、文章解析処理を学習するため「[言語処理100本ノック](http://www.cl.ecei.tohoku.ac.jp/nlp100/)」をやります。今回は一気に飛ばして第8章の機械学習にいってみます。
 
 前回の「[mecabで形態素解析したものをマッピングオブジェクトに突っ込む](http://tech.mof-mof.co.jp/blog/mecab-install.html)」はmecabで形態素解析を試してました。
