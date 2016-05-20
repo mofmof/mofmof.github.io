@@ -6,7 +6,7 @@ tags: scikit-learn,機械学習,machine learning
 summary: TODO
 author: aharada
 ---
-予測関数のパラメータを学習することと、それを検査することに同じデータを利用することは方法論的な間違いです: モデルは、もし繰り返しサンプルデータにラベル付けを続けることで、完璧なスコアをみることができるが、まだ見たことのない新しいデータについては有用な予測を仕兼ねる。 This situation is called overfitting. To avoid it, it is common practice when performing a (supervised) machine learning experiment to hold out part of the available data as a test set X_test, y_test. Note that the word “experiment” is not intended to denote academic use only, because even in commercial settings machine learning usually starts out experimentally.
+予測関数のパラメータを学習することと、それを検査することに同じデータを利用することは方法論的な間違いです: モデルは、もし繰り返しサンプルデータにラベル付けを続けることで、完璧なスコアをみることができますが、まだ見たことのない新しいデータについては有用な予測を仕兼ねます。この状況はオーバーフィッティングと呼ばれます。これを避けるために、利用可能なデータの一部をX_test,y_testというテストセットとして、実際に(教師あり)機械学習を実行してみることは、共通なプラクティスです。 Note that the word “experiment” is not intended to denote academic use only, because even in commercial settings machine learning usually starts out experimentally.
 In scikit-learn a random split into training and test sets can be quickly computed with the train_test_split helper function. Let’s load the iris data set to fit a linear support vector machine on it:
 >>>
 >>> import numpy as np
