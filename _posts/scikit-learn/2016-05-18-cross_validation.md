@@ -6,8 +6,8 @@ tags: scikit-learn,機械学習,machine learning
 summary: TODO
 author: aharada
 ---
-予測関数のパラメータを学習することと、それを検査することに同じデータを利用することは方法論的な間違いです: モデルは、もし繰り返しサンプルデータにラベル付けを続けることで、完璧なスコアをみることができますが、まだ見たことのない新しいデータについては有用な予測を仕兼ねます。この状況はオーバーフィッティングと呼ばれます。これを避けるために、利用可能なデータの一部をX_test,y_testというテストセットとして、実際に(教師あり)機械学習を実行してみることは、共通なプラクティスです。 Note that the word “experiment” is not intended to denote academic use only, because even in commercial settings machine learning usually starts out experimentally.
-In scikit-learn a random split into training and test sets can be quickly computed with the train_test_split helper function. Let’s load the iris data set to fit a linear support vector machine on it:
+予測関数のパラメータを学習することと、それを検査することに同じデータを利用することは方法論的な間違いです: モデルは、もし繰り返しサンプルデータにラベル付けを続けることで、完璧なスコアをみることができますが、まだ見たことのない新しいデータについては有用な予測を仕兼ねます。この状況はオーバーフィッティングと呼ばれます。これを避けるために、利用可能なデータの一部をX_test,y_testというテストセットとして、実際に(教師あり)機械学習を実行して実験してみることは、共通なプラクティスです。 覚書として、"実験"という言葉はアカデミックな用途のみに使われることを目的とはしてはいません。 なぜなら、商業的環境での機械学習においても、通常、実験的にとりかかるものだからです。
+scikit-learnでは、`train_test_split`ヘルパー関数により、高速にトレーニングセットとテストセットをランダムに分割することが出来ます。 Let’s load the iris data set to fit a linear support vector machine on it:
 >>>
 >>> import numpy as np
 >>> from sklearn import cross_validation
