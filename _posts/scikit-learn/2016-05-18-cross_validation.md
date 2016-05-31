@@ -6,10 +6,10 @@ tags: scikit-learn,機械学習,machine learning
 summary: TODO
 author: aharada
 ---
-予測関数のパラメータを学習することと、それを検査することに同じデータを利用することは方法論的な間違いです: モデルは、もし繰り返しサンプルデータにラベル付けを続けることで、完璧なスコアをみることができますが、まだ見たことのない新しいデータについては有用な予測を仕兼ねます。この状況はオーバーフィッティングと呼ばれます。これを避けるために、利用可能なデータの一部をX_test,y_testというテストセットとして、実際に(教師あり)機械学習を実行して実験してみることは、共通なプラクティスです。 覚書として、"実験"という言葉はアカデミックな用途のみに使われることを目的とはしてはいません。 なぜなら、商業的環境での機械学習においても、通常、実験的にとりかかるものだからです。
+予測関数のパラメータを学習することと、それを検査することに同じデータを利用することは方法論的な間違いです: モデルは、もし繰り返しサンプルデータにラベル付けを続けることで、完璧なスコアをみることができますが、まだ見たことのない新しいデータについては有用な予測を仕兼ねます。この状況は**オーバーフィッティング**と呼ばれます。これを避けるために、利用可能なデータの一部を`X_test,y_test`というテストセットとして、実際に(教師あり)機械学習を実行して実験してみることは、共通なプラクティスです。 覚書として、"実験"という言葉はアカデミックな用途のみに使われることを目的とはしてはいません。 なぜなら、商業的環境での機械学習においても、通常、実験的にとりかかるものだからです。
 scikit-learnでは、`train_test_split`ヘルパー関数により、高速にトレーニングセットとテストセットをランダムに分割することが出来ます。線形カーネルのサポートベクターマシンにフィットさせるために、アヤメの計測データを読み込んでみましょう:
 
->>>
+```
 >>> import numpy as np
 >>> from sklearn import cross_validation
 >>> from sklearn import datasets
@@ -18,8 +18,11 @@ scikit-learnでは、`train_test_split`ヘルパー関数により、高速に�
 >>> iris = datasets.load_iris()
 >>> iris.data.shape, iris.target.shape
 ((150, 4), (150,))
-We can now quickly sample a training set while holding out 40% of the data for testing (evaluating) our classifier:
->>>
+```
+
+分類器をテスト（評価）するために、トレーニングセット中の40%のサンプルデータを素早く提供することが出来ます:
+
+```
 >>> X_train, X_test, y_train, y_test = cross_validation.train_test_split(
 ...     iris.data, iris.target, test_size=0.4, random_state=0)
 
@@ -31,6 +34,8 @@ We can now quickly sample a training set while holding out 40% of the data for t
 >>> clf = svm.SVC(kernel='linear', C=1).fit(X_train, y_train)
 >>> clf.score(X_test, y_test)                           
 0.96...
+```
+
 When evaluating different settings (“hyperparameters”) for estimators, such as the C setting that must be manually set for an SVM, there is still a risk of overfitting on the test set because the parameters can be tweaked until the estimator performs optimally. This way, knowledge about the test set can “leak” into the model and evaluation metrics no longer report on generalization performance. To solve this problem, yet another part of the dataset can be held out as a so-called “validation set”: training proceeds on the training set, after which evaluation is done on the validation set, and when the experiment seems to be successful, final evaluation can be done on the test set.
 However, by partitioning the available data into three sets, we drastically reduce the number of samples which can be used for learning the model, and the results can depend on a particular random choice for the pair of (train, validation) sets.
 A solution to this problem is a procedure called cross-validation (CV for short). A test set should still be held out for final evaluation, but the validation set is no longer needed when doing CV. In the basic approach, called k-fold CV, the training set is split into k smaller sets (other approaches are described below, but generally follow the same principles). The following procedure is followed for each of the k “folds”:
@@ -232,7 +237,9 @@ Example of Leave-2-Label Out:
 
 ShuffleSplit
 The ShuffleSplit iterator will generate a user defined number of independent train / test dataset splits. Samples are first shuffled and then split into a pair of train and test sets.
+
 It is possible to control the randomness for reproducibility of the results by explicitly seeding the random_state pseudo random number generator.
+
 Here is a usage example:
 >>>
 >>> ss = cross_validation.ShuffleSplit(5, n_iter=3, test_size=0.25,
