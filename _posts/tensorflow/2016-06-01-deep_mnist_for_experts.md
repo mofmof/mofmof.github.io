@@ -2,7 +2,7 @@
 layout: blog
 title: 熟練者向けディープMNIST
 category: tensorflow
-tags: tensorflow,機械学習,machine learning,tensorflow tutorial
+tags: tensorflow,機械学習,machine learning,tensorflow tutorial,翻訳,Deep MNIST
 summary: TODO
 author: aharada
 ---
@@ -11,19 +11,22 @@ TensorFlowは大規模な数値計算を行うための強力なライブラリ�
 
 このイントロダクションは、ニューラルネットワークとMNISTデータセットについて良く知っているものと仮定しています。もしあなたがそれらのバックグラウンドを持っていないのなら、ビギナー向けのイントロダクションを進めてください。始める前に必ずTensorFlowをインストールしてください。
 
-Setup
+# セットアップ
 
-Before we create our model, we will first load the MNIST dataset, and start a TensorFlow session.
+モデルを作る前に、最初にMNISTデータセットをロードし、TensorFlowのセッションをスタートします。
 
-Load MNIST Data
+# MNISTデータをロードする
 
-For your convenience, we've included a script which automatically downloads and imports the MNIST dataset. It will create a directory 'MNIST_data' in which to store the data files.
+便利なことに、MNISTデータセットを自動的にダウンロードしてインポートしてくれるスクリプトが含まれています。これは 'MNIST_data' ディレクトリを作成し、データファイルを保存します。
 
+```
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
-Here mnist is a lightweight class which stores the training, validation, and testing sets as NumPy arrays. It also provides a function for iterating through data minibatches, which we will use below.
+```
 
-Start TensorFlow InteractiveSession
+この`mnist`は軽量の分類データで、NumPy配列形式のトレーニングセット、バリデーションセット、テストセットです。また、以下で使うことになる、ミニバッチを繰り返し通す関数も提供しています。
+
+# TensorFlowのインタラクティブセッションをスタートする
 
 Tensorflow relies on a highly efficient C++ backend to do its computation. The connection to this backend is called a session. The common usage for TensorFlow programs is to first create a graph and then launch it in a session.
 
