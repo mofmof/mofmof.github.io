@@ -28,9 +28,9 @@ mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
 # TensorFlowのインタラクティブセッションをスタートする
 
-Tensorflow relies on a highly efficient C++ backend to do its computation. The connection to this backend is called a session. The common usage for TensorFlow programs is to first create a graph and then launch it in a session.
+Tensorflowは計算処理をするのにバックエンドでC++を使っています。このバックエンドへのコネクションのことをことをセッションと呼んでいます。TensorFlowプログラムの慣例では、最初にグラフを作成し、セッションでそれを起動します。
 
-Here we instead use the convenient InteractiveSession class, which makes TensorFlow more flexible about how you structure your code. It allows you to interleave operations which build a computation graph with ones that run the graph. This is particularly convenient when working in interactive contexts like IPython. If you are not using an InteractiveSession, then you should build the entire computation graph before starting a session and launching the graph.
+その代わりにTensorFlowではコードを構造的に書くのに便利な`InteractiveSession`クラスを使います。これは、グラフを生成する処理とグラフを実行する処理のインタリーブを許可します。 This is particularly convenient when working in interactive contexts like IPython. If you are not using an InteractiveSession, then you should build the entire computation graph before starting a session and launching the graph.
 
 import tensorflow as tf
 sess = tf.InteractiveSession()
