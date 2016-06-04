@@ -30,19 +30,22 @@ mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
 Tensorflowは計算処理をするのにバックエンドでC++を使っています。このバックエンドへのコネクションのことをことをセッションと呼んでいます。TensorFlowプログラムの慣例では、最初にグラフを作成し、セッションでそれを起動します。
 
-その代わりにTensorFlowではコードを構造的に書くのに便利な`InteractiveSession`クラスを使います。これは、グラフを生成する処理とグラフを実行する処理のインタリーブを許可します。 This is particularly convenient when working in interactive contexts like IPython. If you are not using an InteractiveSession, then you should build the entire computation graph before starting a session and launching the graph.
+その代わりにTensorFlowではコードを構造的に書くのに便利な`InteractiveSession`クラスを使います。これは、グラフを生成する処理とグラフを実行する処理のインタリーブを許可します。 これは特にIPythonのように双方向のやりとりがあるときに便利です。もしインタラクティブセッションを使わなかった場合、セッションの開始やグラフの出力の前に、全部のグラフ処理を組み立てなければならない。
 
+```
 import tensorflow as tf
 sess = tf.InteractiveSession()
-Computation Graph
+```
 
-To do efficient numerical computing in Python, we typically use libraries like NumPy that do expensive operations such as matrix multiplication outside Python, using highly efficient code implemented in another language. Unfortunately, there can still be a lot of overhead from switching back to Python every operation. This overhead is especially bad if you want to run computations on GPUs or in a distributed manner, where there can be a high cost to transferring data.
+## グラフの処理
 
-TensorFlow also does its heavy lifting outside Python, but it takes things a step further to avoid this overhead. Instead of running a single expensive operation independently from Python, TensorFlow lets us describe a graph of interacting operations that run entirely outside Python. This approach is similar to that used in Theano or Torch.
+Pythonで効率的な数値計算をするためには、一般的にはNumPyのように、コストが高い行列の掛け算を行えるライブラリなど、別言語で実装された非常に処理効率の良いコードを使います。残念なことに、いまだ全ての操作において、処理をPythonに戻す際に多くのオーバーヘッドが発生してしまいます。このオーバーヘッドは、GPU上で処理を走らせたい時や分散処理をしたい場合に特に悪く、データ転送するために高い処理コストがかかってしまうことが起こり得る。
 
-The role of the Python code is therefore to build this external computation graph, and to dictate which parts of the computation graph should be run. See the Computation Graph section of Basic Usage for more detail.
+また、TensorFlowはPythonの外側でこの重い処理を行いますが、ステップを踏んで、このオーバーヘッドを避けていきます。 Pythonから独立してコストの高い処理を走らせる代わりに、TensorFlowでは 完全にPythonの外側で実行される双方向操作のグラフ描写を許可します。このアプローチはTheanoやTorchを使うとの同様です。
 
-Build a Softmax Regression Model
+Pythonコードの役割は、外側でグラフ処理を構築するために、グラフ処理するための部品の実行を命令することです。それでは、グラフ処理の基本的になやり方の詳細を見ていきましょう。
+
+# Build a Softmax Regression Model
 
 In this section we will build a softmax regression model with a single linear layer. In the next section, we will extend this to the case of softmax regression with a multilayer convolutional network.
 
