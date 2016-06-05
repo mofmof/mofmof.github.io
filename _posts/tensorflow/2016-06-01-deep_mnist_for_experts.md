@@ -45,23 +45,26 @@ Pythonで効率的な数値計算をするためには、一般的にはNumPyの
 
 Pythonコードの役割は、外側でグラフ処理を構築するために、グラフ処理するための部品の実行を命令することです。それでは、グラフ処理の基本的になやり方の詳細を見ていきましょう。
 
-# Build a Softmax Regression Model
+# ソフトマックス回帰モデルの構築
 
-In this section we will build a softmax regression model with a single linear layer. In the next section, we will extend this to the case of softmax regression with a multilayer convolutional network.
+このセクションでは、単一の線形レイヤーのソフトマックス回帰モデルの構築について扱います。次のセクションでは、これを拡張した、マルチレイヤーの畳み込みネットワークを使ったSoftmax回帰を扱います。
 
-Placeholders
+## Placeholders
 
-We start building the computation graph by creating nodes for the input images and target output classes.
+入力画像と出力するクラスのためのノードの作成することにより、グラフ処理の構築を始めます。
 
+```
 x = tf.placeholder(tf.float32, shape=[None, 784])
 y_ = tf.placeholder(tf.float32, shape=[None, 10])
-Here x and y_ aren't specific values. Rather, they are each a placeholder -- a value that we'll input when we ask TensorFlow to run a computation.
+```
 
-The input images x will consist of a 2d tensor of floating point numbers. Here we assign it a shape of [None, 784], where 784 is the dimensionality of a single flattened MNIST image, and None indicates that the first dimension, corresponding to the batch size, can be of any size. The target output classes y_ will also consist of a 2d tensor, where each row is a one-hot 10-dimensional vector indicating which digit class the corresponding MNIST image belongs to.
+この時点では`x`と`y_`には特定の値は入っていません。むしろ、これらは`プレースホルダ`であり、TensolFlowが処理を実行するタイミングで入力されます。
 
-The shape argument to placeholder is optional, but it allows TensorFlow to automatically catch bugs stemming from inconsistent tensor shapes.
+入力画像`x`は二次元の浮動小数点数を持つテンソルから成り立つ。これには`[None, 784]`という抽象的な型を代入します。`784`というのはMNIST画像の数で、`None`は一括処理するサイズにともなって、いくつかの値が入ることを示します。ターゲットの出力クラスの`y_`は2次元のテンソルから成り立ち、MNIST画像がどの数字であるかを示す、one-hot(1が1つで残りが全て0である)な10次元のベクトルです。
 
-Variables
+`shape`は任意の引数ですが、テンソルのシェイプに一致していないことが原因のバグを自動的にキャッチされます。
+
+## Variables
 
 We now define the weights W and biases b for our model. We could imagine treating these like additional inputs, but TensorFlow has an even better way to handle them: Variable. A Variable is a value that lives in TensorFlow's computation graph. It can be used and even modified by the computation. In machine learning applications, one generally has the model parameters be Variables.
 
