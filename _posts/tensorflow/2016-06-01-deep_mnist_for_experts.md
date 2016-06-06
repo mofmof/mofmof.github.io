@@ -49,7 +49,7 @@ Pythonコードの役割は、外側でグラフ処理を構築するために�
 
 このセクションでは、単一の線形レイヤーのソフトマックス回帰モデルの構築について扱います。次のセクションでは、これを拡張した、マルチレイヤーの畳み込みネットワークを使ったSoftmax回帰を扱います。
 
-## Placeholders
+## プレースホルダ
 
 入力画像と出力するクラスのためのノードの作成することにより、グラフ処理の構築を始めます。
 
@@ -64,9 +64,9 @@ y_ = tf.placeholder(tf.float32, shape=[None, 10])
 
 `shape`は任意の引数ですが、テンソルのシェイプに一致していないことが原因のバグを自動的にキャッチされます。
 
-## Variables
+## 変数
 
-We now define the weights W and biases b for our model. We could imagine treating these like additional inputs, but TensorFlow has an even better way to handle them: Variable. A Variable is a value that lives in TensorFlow's computation graph. It can be used and even modified by the computation. In machine learning applications, one generally has the model parameters be Variables.
+まずは重みである`W`とバイアスである`b`を定義します。追加入力のように扱うことが想像できますが、TensorFlowでは`Variable`というよりよい方法があります。`Variable`は TensorFlowのグラフ処理で扱われる値です。これは処理において利用・修正することが出来ます。In machine learning applications, one generally has the model parameters be Variables.
 
 W = tf.Variable(tf.zeros([784,10]))
 b = tf.Variable(tf.zeros([10]))
