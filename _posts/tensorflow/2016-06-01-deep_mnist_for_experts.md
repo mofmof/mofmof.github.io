@@ -11,11 +11,11 @@ TensorFlowは大規模な数値計算を行うための強力なライブラリ�
 
 このイントロダクションは、ニューラルネットワークとMNISTデータセットについて良く知っているものと仮定しています。もしあなたがそれらのバックグラウンドを持っていないのなら、ビギナー向けのイントロダクションを進めてください。始める前に必ずTensorFlowをインストールしてください。
 
-# セットアップ
+## セットアップ
 
 モデルを作る前に、最初にMNISTデータセットをロードし、TensorFlowのセッションをスタートします。
 
-# MNISTデータをロードする
+### MNISTデータをロードする
 
 便利なことに、MNISTデータセットを自動的にダウンロードしてインポートしてくれるスクリプトが含まれています。これは 'MNIST_data' ディレクトリを作成し、データファイルを保存します。
 
@@ -26,7 +26,7 @@ mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
 この`mnist`は軽量の分類データで、NumPy配列形式のトレーニングセット、バリデーションセット、テストセットです。また、以下で使うことになる、ミニバッチを繰り返し通す関数も提供しています。
 
-# TensorFlowのインタラクティブセッションをスタートする
+### TensorFlowのインタラクティブセッションをスタートする
 
 Tensorflowは計算処理をするのにバックエンドでC++を使っています。このバックエンドへのコネクションのことをことをセッションと呼んでいます。TensorFlowプログラムの慣例では、最初にグラフを作成し、セッションでそれを起動します。
 
@@ -37,7 +37,7 @@ import tensorflow as tf
 sess = tf.InteractiveSession()
 ```
 
-## グラフの処理
+#### グラフの処理
 
 Pythonで効率的な数値計算をするためには、一般的にはNumPyのように、コストが高い行列の掛け算を行えるライブラリなど、別言語で実装された非常に処理効率の良いコードを使います。残念なことに、いまだ全ての操作において、処理をPythonに戻す際に多くのオーバーヘッドが発生してしまいます。このオーバーヘッドは、GPU上で処理を走らせたい時や分散処理をしたい場合に特に悪く、データ転送するために高い処理コストがかかってしまうことが起こり得る。
 
@@ -45,11 +45,11 @@ Pythonで効率的な数値計算をするためには、一般的にはNumPyの
 
 Pythonコードの役割は、外側でグラフ処理を構築するために、グラフ処理するための部品の実行を命令することです。それでは、グラフ処理の基本的になやり方の詳細を見ていきましょう。
 
-# ソフトマックス回帰モデルの構築
+## ソフトマックス回帰モデルの構築
 
 このセクションでは、単一の線形レイヤーのソフトマックス回帰モデルの構築について扱います。次のセクションでは、これを拡張した、マルチレイヤーの畳み込みネットワークを使ったSoftmax回帰を扱います。
 
-## プレースホルダ
+### プレースホルダ
 
 入力画像と出力するクラスのためのノードの作成することにより、グラフ処理の構築を始めます。
 
@@ -64,22 +64,31 @@ y_ = tf.placeholder(tf.float32, shape=[None, 10])
 
 `shape`は任意の引数ですが、テンソルのシェイプに一致していないことが原因のバグを自動的にキャッチされます。
 
-## 変数
+### 変数
 
-まずは重みである`W`とバイアスである`b`を定義します。追加入力のように扱うことが想像できますが、TensorFlowでは`Variable`というよりよい方法があります。`Variable`は TensorFlowのグラフ処理で扱われる値です。これは処理において利用・修正することが出来ます。In machine learning applications, one generally has the model parameters be Variables.
+まずは重みである`W`とバイアスである`b`を定義します。追加入力のように扱うことが想像できますが、TensorFlowでは`Variable`というよりよい方法があります。`Variable`は TensorFlowのグラフ処理で扱われる値です。これは処理において利用・修正することが出来ます。機械学習アプリケーションでは、たいてい1つはモデルの変数パラメータを持っているものです。
 
+```
 W = tf.Variable(tf.zeros([784,10]))
 b = tf.Variable(tf.zeros([10]))
-We pass the initial value for each parameter in the call to tf.Variable. In this case, we initialize both W and b as tensors full of zeros. W is a 784x10 matrix (because we have 784 input features and 10 outputs) and b is a 10-dimensional vector (because we have 10 classes).
+```
 
-Before Variables can be used within a session, they must be initialized using that session. This step takes the initial values (in this case tensors full of zeros) that have already been specified, and assigns them to each Variable. This can be done for all Variables at once.
+`tf.Variable`を呼び出して各パラメータを初期化を渡します。このケースでは、`W`と`b`ともにゼロで埋めた値で初期化しています。`W`は784x10次元の行列（つまり784個の入力と10の出力がある）で`b`は10次元のベクトル（10の分類）です。
 
+`Variable`sはセッションの中で使うことができ、必ず初期化しなければなりません。 このステップでは既に指定された初期値（この場合はテンソルはゼロ埋めされている）をとり、それぞれの変数に割り当てます。これはそれぞれの変数について一度に行うことが出来ます。
+
+```
 sess.run(tf.initialize_all_variables())
-Predicted Class and Cost Function
+```
 
-We can now implement our regression model. It only takes one line! We multiply the vectorized input images x by the weight matrix W, add the bias b, and compute the softmax probabilities that are assigned to each class.
+### 予測とコストファンクション
 
+回帰モデルを実装していきます。これはなんと一行で実装出来ます！ベクトル化された入力画像と重みの行列の`w`を掛け、バイアス`b`を足して、各クラスごとのsoftmax確率を計算します。
+
+```
 y = tf.nn.softmax(tf.matmul(x,W) + b)
+```
+
 The cost function to be minimized during training can be specified just as easily. Our cost function will be the cross-entropy between the target and the model's prediction.
 
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))
