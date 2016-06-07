@@ -99,10 +99,13 @@ cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=
 
 ## モデルを訓練する
 
-これまでに訓練するコストファンクションを定義しました。これはTensorFlowを使った単純な訓練の仕方の例です。Because TensorFlow knows the entire computation graph, it can use automatic differentiation to find the gradients of the cost with respect to each of the variables. TensorFlow has a variety of builtin optimization algorithms. For this example, we will use steepest gradient descent, with a step length of 0.5, to descend the cross entropy.
+これまでに訓練するコストファンクションを定義しました。これはTensorFlowを使った単純な訓練の仕方の例です。TensorFlowは全体のグラフ処理を知っているため、勾配のコストを自動的に識別することが出来る。TensorFlowは色々の最適化されたアルゴリズムを標準で組み込んでいます。この例は、勾配の大きい最急降下法で、降りるステップの長さが0.5の交差エントロピーです。
 
+```
 train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
-What TensorFlow actually did in that single line was to add new operations to the computation graph. These operations included ones to compute gradients, compute parameter update steps, and apply update steps to the parameters.
+```
+
+TensorFlowでは実際にグラフ処理のために一行を追加します。これらの操作には1回の勾配計算が含まれており、パラメータを処理し更新します。
 
 The returned operation train_step, when run, will apply the gradient descent updates to the parameters. Training the model can therefore be accomplished by repeatedly running train_step.
 
