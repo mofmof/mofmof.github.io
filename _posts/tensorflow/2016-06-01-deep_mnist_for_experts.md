@@ -89,14 +89,17 @@ sess.run(tf.initialize_all_variables())
 y = tf.nn.softmax(tf.matmul(x,W) + b)
 ```
 
-The cost function to be minimized during training can be specified just as easily. Our cost function will be the cross-entropy between the target and the model's prediction.
+このコストファンクションでトレーニングすることで簡単に最小化することが出来ます。コストファンクションはターゲットとモデルの予測との間の交差エントロピーになります。
 
+```
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))
-Note that tf.reduce_sum sums across all classes and tf.reduce_mean takes the average over these sums.
+```
 
-Train the Model
+`tf.reduce_sum`は全てのクラスにまたがって合計し、`tf.reduce_mean`はそれらの平均をとります。
 
-Now that we have defined our model and training cost function, it is straightforward to train using TensorFlow. Because TensorFlow knows the entire computation graph, it can use automatic differentiation to find the gradients of the cost with respect to each of the variables. TensorFlow has a variety of builtin optimization algorithms. For this example, we will use steepest gradient descent, with a step length of 0.5, to descend the cross entropy.
+## モデルを訓練する
+
+これまでに訓練するコストファンクションを定義しました。これはTensorFlowを使った単純な訓練の仕方の例です。Because TensorFlow knows the entire computation graph, it can use automatic differentiation to find the gradients of the cost with respect to each of the variables. TensorFlow has a variety of builtin optimization algorithms. For this example, we will use steepest gradient descent, with a step length of 0.5, to descend the cross entropy.
 
 train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 What TensorFlow actually did in that single line was to add new operations to the computation graph. These operations included ones to compute gradients, compute parameter update steps, and apply update steps to the parameters.
