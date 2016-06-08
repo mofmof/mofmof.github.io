@@ -107,18 +107,21 @@ train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 
 TensorFlowでは実際にグラフ処理のために一行を追加します。これらの操作には1回の勾配計算が含まれており、パラメータを処理し更新します。
 
-The returned operation train_step, when run, will apply the gradient descent updates to the parameters. Training the model can therefore be accomplished by repeatedly running train_step.
+戻り値の`train_step`は最急降下法によって更新されるパラメータです。モデルは、何度も`train_step`を繰り返し実行することにより完成されます。
 
+```
 for i in range(1000):
   batch = mnist.train.next_batch(50)
   train_step.run(feed_dict={x: batch[0], y_: batch[1]})
-Each training iteration we load 50 training examples. We then run the train_step operation, using feed_dict to replace the placeholder tensors x and y_ with the training examples. Note that you can replace any tensor in your computation graph using feed_dict -- it's not restricted to just placeholders.
+```
 
-Evaluate the Model
+トレーニングの反復一回で、50件のトレーニングセットを読み込みます。`train_step`の操作では`feed_dict`を使うことでプレースホルダである`x`と`y_`を訓練セットの内容で置き換えます。`feed_dict`を使うことでグラフ処理の中のテンソルを置き換えることが出来ます。これはプレースホルダだけに限定されません。
 
-How well did our model do?
+### モデルの評価
 
-First we'll figure out where we predicted the correct label. tf.argmax is an extremely useful function which gives you the index of the highest entry in a tensor along some axis. For example, tf.argmax(y,1) is the label our model thinks is most likely for each input, while tf.argmax(y_,1) is the true label. We can use tf.equal to check if our prediction matches the truth.
+モデルはうまく振舞っていますか？
+
+最初に、正しいラベルを予測されたことを理解します。 `tf.argmax`は非常にに便利な関数で精度の高いエントリーのインデックスを与えてくれます。 For example, tf.argmax(y,1) is the label our model thinks is most likely for each input, while tf.argmax(y_,1) is the true label. We can use tf.equal to check if our prediction matches the truth.
 
 correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 That gives us a list of booleans. To determine what fraction are correct, we cast to floating point numbers and then take the mean. For example, [True, False, True, True] would become [1,0,1,1] which would become 0.75.
