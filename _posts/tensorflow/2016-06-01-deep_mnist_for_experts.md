@@ -121,7 +121,7 @@ for i in range(1000):
 
 モデルはうまく振舞っていますか？
 
-最初に、正しいラベルを予測されたことを理解します。 `tf.argmax`は非常にに便利な関数で精度の高いエントリーのインデックスを与えてくれます。 For example, tf.argmax(y,1) is the label our model thinks is most likely for each input, while tf.argmax(y_,1) is the true label. We can use tf.equal to check if our prediction matches the truth.
+最初に、正しいラベルを予測されたことを理解します。 `tf.argmax`は非常にに便利な関数で精度の高いエントリーのインデックスを与えてくれます。 例えば、`tf.argmax(y,1)`はモデルが最も可能性が高いと考えているラベルで、`tf.argmax(y_,1)`は`true`のラベルです。We can use tf.equal to check if our prediction matches the truth.
 
 correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 That gives us a list of booleans. To determine what fraction are correct, we cast to floating point numbers and then take the mean. For example, [True, False, True, True] would become [1,0,1,1] which would become 0.75.
