@@ -121,10 +121,13 @@ for i in range(1000):
 
 モデルはうまく振舞っていますか？
 
-最初に、正しいラベルを予測されたことを理解します。 `tf.argmax`は非常にに便利な関数で精度の高いエントリーのインデックスを与えてくれます。 例えば、`tf.argmax(y,1)`はモデルが最も可能性が高いと考えているラベルで、`tf.argmax(y_,1)`は`true`のラベルです。We can use tf.equal to check if our prediction matches the truth.
+最初に、正しいラベルを予測されたことを理解します。 `tf.argmax`は非常にに便利な関数で精度の高いエントリーのインデックスを与えてくれます。 例えば、`tf.argmax(y,1)`はモデルが最も可能性が高いと考えているラベルで、`tf.argmax(y_,1)`は`true`のラベルです。`tf.equal`は予測が正しい方どうかをチェックするために使うことが出来ます。
 
+```
 correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
-That gives us a list of booleans. To determine what fraction are correct, we cast to floating point numbers and then take the mean. For example, [True, False, True, True] would become [1,0,1,1] which would become 0.75.
+```
+
+この結果はbooleanのlistを返します。それぞれが正しいことを決定し、浮動小数点数を指定して実行すると、平均値が取得される。例えば、`[True, False, True, True]`は`[1,0,1,1]`になり`0.75`となる。
 
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 Finally, we can evaluate our accuracy on the test data. This should be about 92% correct.
