@@ -129,17 +129,23 @@ correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
 
 この結果はbooleanのlistを返します。それぞれが正しいことを決定し、浮動小数点数を指定して実行すると、平均値が取得される。例えば、`[True, False, True, True]`は`[1,0,1,1]`になり`0.75`となる。
 
+```
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-Finally, we can evaluate our accuracy on the test data. This should be about 92% correct.
+```
 
+最終的に、テストデータにおける正確さは92%となります。
+
+```
 print(accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
-Build a Multilayer Convolutional Network
+```
 
-Getting 91% accuracy on MNIST is bad. It's almost embarrassingly bad. In this section, we'll fix that, jumping from a very simple model to something moderately sophisticated: a small convolutional neural network. This will get us to around 99.2% accuracy -- not state of the art, but respectable.
+## 複数レイヤー畳込みネットワークの構築
 
-Weight Initialization
+MNISTで91%の正確さは、はずかしいくらいに悪い精度です。このセクションでは、非常にシンプルなモデルから洗練されたモデルへと改善させます。小さな畳込みニューラルネットワークで99.2%の正確さを実現させます。 -- 最先端の技術ではありませんが、満足できます。
 
-To create this model, we're going to need to create a lot of weights and biases. One should generally initialize weights with a small amount of noise for symmetry breaking, and to prevent 0 gradients. Since we're using ReLU neurons, it is also good practice to initialize them with a slightly positive initial bias to avoid "dead neurons." Instead of doing this repeatedly while we build the model, let's create two handy functions to do it for us.
+### 重みの初期化
+
+このモデルを作るためには、たくさんの重みとバイアスを作らなければなりません。一つは、重みはノイズを含んだ非対称の小さい値であり、かつ勾配が0になるのを避ける値である必要があります。Since we're using ReLU neurons, it is also good practice to initialize them with a slightly positive initial bias to avoid "dead neurons." Instead of doing this repeatedly while we build the model, let's create two handy functions to do it for us.
 
 def weight_variable(shape):
   initial = tf.truncated_normal(shape, stddev=0.1)
