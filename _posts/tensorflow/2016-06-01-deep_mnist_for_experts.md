@@ -139,14 +139,15 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 print(accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
 ```
 
-## 複数レイヤー畳込みネットワークの構築
+## 複数レイヤー畳み込みネットワークの構築
 
-MNISTで91%の正確さは、はずかしいくらいに悪い精度です。このセクションでは、非常にシンプルなモデルから洗練されたモデルへと改善させます。小さな畳込みニューラルネットワークで99.2%の正確さを実現させます。 -- 最先端の技術ではありませんが、満足できます。
+MNISTで91%の正確さは、はずかしいくらいに悪い精度です。このセクションでは、非常にシンプルなモデルから洗練されたモデルへと改善させます。小さな畳み込みニューラルネットワークで99.2%の正確さを実現させます。 -- 最先端の技術ではありませんが、満足できます。
 
 ### 重みの初期化
 
-このモデルを作るためには、たくさんの重みとバイアスを作らなければなりません。一つは、重みはノイズを含んだ非対称の小さい値であり、かつ勾配が0になるのを避ける値である必要があります。Since we're using ReLU neurons, it is also good practice to initialize them with a slightly positive initial bias to avoid "dead neurons." Instead of doing this repeatedly while we build the model, let's create two handy functions to do it for us.
+このモデルを作るためには、たくさんの重みとバイアスを作らなければなりません。一つは、重みはノイズを含んだ非対称の小さい値であり、かつ勾配が0になるのを避ける値である必要があります。ReLUニューロンを使い始めて以来、小さい正の値でバイアスを初期化することもまた、"死んだニューロン"を避けるための良いプラクティスです。その代わりに繰り返しモデルを構築する手軽な2つの関数を実装してみましょう。
 
+```
 def weight_variable(shape):
   initial = tf.truncated_normal(shape, stddev=0.1)
   return tf.Variable(initial)
@@ -154,29 +155,43 @@ def weight_variable(shape):
 def bias_variable(shape):
   initial = tf.constant(0.1, shape=shape)
   return tf.Variable(initial)
-Convolution and Pooling
+```
 
-TensorFlow also gives us a lot of flexibility in convolution and pooling operations. How do we handle the boundaries? What is our stride size? In this example, we're always going to choose the vanilla version. Our convolutions uses a stride of one and are zero padded so that the output is the same size as the input. Our pooling is plain old max pooling over 2x2 blocks. To keep our code cleaner, let's also abstract those operations into functions.
+### 畳み込みとプーリング
 
+TensorFloはたくさんの柔軟な畳み込みとプーリングも提供しています。どうやって境界を扱うのか？ひとまたぎのサイズは何でしょうか？この例では、常に平凡なバージョンを選択します。畳み込みは、1と0で埋められたひとまたぎを使います。このアウトプットはインプットと同じサイズです。プーリングは2x2ブロックの単純なold max poolingです。綺麗なコードを保つために、そのような抽象的な処理も関数にして実装しましょう。
+
+```
 def conv2d(x, W):
   return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
 
 def max_pool_2x2(x):
   return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
                         strides=[1, 2, 2, 1], padding='SAME')
-First Convolutional Layer
+```
 
-We can now implement our first layer. It will consist of convolution, followed by max pooling. The convolutional will compute 32 features for each 5x5 patch. Its weight tensor will have a shape of [5, 5, 1, 32]. The first two dimensions are the patch size, the next is the number of input channels, and the last is the number of output channels. We will also have a bias vector with a component for each output channel.
+### 最初の畳み込みレイヤー
 
+最初のレイヤーを実装していきます。これはmax poolingの畳み込みから構成されます。この畳み込みは各5x5のパッチの32フィーチャーで処理されます。この重みテンソルは`[5, 5, 1, 32]`のシェイプを持ちます。最初の2つの次元はパッチサイズで、次は入力チャネルの数で、最後はアウトプットチャネルの数です。また、各出力チャネルの要素にはバイアスのベクトルを持っています。
+
+```
 W_conv1 = weight_variable([5, 5, 1, 32])
 b_conv1 = bias_variable([32])
-To apply the layer, we first reshape x to a 4d tensor, with the second and third dimensions corresponding to image width and height, and the final dimension corresponding to the number of color channels.
+```
 
+レイヤーに適用するには、まず最初に`x`を4dのテンソルにreshapeします。2、3次元は画像の横幅・縦幅に相当し、最後の次元はカラーチャンネルの数に相当します。
+
+```
 x_image = tf.reshape(x, [-1,28,28,1])
-We then convolve x_image with the weight tensor, add the bias, apply the ReLU function, and finally max pool.
+```
 
+`x_image`と重みテンソルを畳み込み、バイアスを加算したものに、ReLU関数を適用し、最後にmax_poolを実行します。
+
+```
 h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
 h_pool1 = max_pool_2x2(h_conv1)
+```
+
 Second Convolutional Layer
 
 In order to build a deep network, we stack several layers of this type. The second layer will have 64 features for each 5x5 patch.
