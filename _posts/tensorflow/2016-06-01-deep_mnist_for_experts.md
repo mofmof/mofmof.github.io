@@ -192,42 +192,55 @@ h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
 h_pool1 = max_pool_2x2(h_conv1)
 ```
 
-Second Convolutional Layer
+### 2つ目の畳み込みレイヤー
 
-In order to build a deep network, we stack several layers of this type. The second layer will have 64 features for each 5x5 patch.
+ディープネットワークを構築するためには、このタイプのレイヤーを積み重ねます。2つのレイヤーは5x5のパッチの64個のフィーチャーを持つことになります。
 
+```
 W_conv2 = weight_variable([5, 5, 32, 64])
 b_conv2 = bias_variable([64])
 
 h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
 h_pool2 = max_pool_2x2(h_conv2)
-Densely Connected Layer
+```
 
-Now that the image size has been reduced to 7x7, we add a fully-connected layer with 1024 neurons to allow processing on the entire image. We reshape the tensor from the pooling layer into a batch of vectors, multiply by a weight matrix, add a bias, and apply a ReLU.
+### 密集して接続されたレイヤー
 
+画像サイズを7x7に減少させ、全体の画像から処理することを許可された1024のニューロンを持つ、完全に接続されたレイヤーを追加します。プーリングレイヤーから取り出したテンソルを作り変えて、一括ベクトルの中へ入れ、重みの行列を掛け、バイアスを加算し、ReLUを適用します。
+
+```
 W_fc1 = weight_variable([7 * 7 * 64, 1024])
 b_fc1 = bias_variable([1024])
 
 h_pool2_flat = tf.reshape(h_pool2, [-1, 7*7*64])
 h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
-Dropout
+```
 
-To reduce overfitting, we will apply dropout before the readout layer. We create a placeholder for the probability that a neuron's output is kept during dropout. This allows us to turn dropout on during training, and turn it off during testing. TensorFlow's tf.nn.dropout op automatically handles scaling neuron outputs in addition to masking them, so dropout just works without any additional scaling.1
+#### ドロップアウト
 
+オーバーフィッティングを避けるために、読み出しレイヤーの前にドロップアウトを適用します。 ニューロンの出力はドロップアウトの間、保持される見込みの`placeholder`を作成します。トレーニング中にドロップアウトをオンにし、テスト中にそれをオフにすることが出来ます。TensoFlowの`tf.nn.dropout`は追加マスキングの中の出力ニューロンのスケーリングを自動的にハンドリングし、追加のスケーリングなしでドロップアウトを動かせます。
+
+```
 keep_prob = tf.placeholder(tf.float32)
 h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
-Readout Layer
+```
 
-Finally, we add a softmax layer, just like for the one layer softmax regression above.
+### 読み出しレイヤー
 
+最後に、上記のソフトマックス回帰のような、ソフトマックスレイヤーを追加します。
+
+```
 W_fc2 = weight_variable([1024, 10])
 b_fc2 = bias_variable([10])
 
 y_conv=tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
-Train and Evaluate the Model
+```
 
-How well does this model do? To train and evaluate it we will use code that is nearly identical to that for the simple one layer SoftMax network above. The differences are that: we will replace the steepest gradient descent optimizer with the more sophisticated ADAM optimizer; we will include the additional parameter keep_prob in feed_dict to control the dropout rate; and we will add logging to every 100th iteration in the training process.
+### モデルのトレーニングと評価
 
+このモデルはどれだけの良く振る舞ってくれるでしょうか？トレーニングと評価をするためには、上記のような1レイヤーのソフトマックスネットワークとほとんど同じコードを使います。The differences are that: 違うところは、急な最急降下法のオプティマイザから、さらに洗練されたADAMオプティマイザに置き換えているところです。ドロップアウト率をコントロールする`feed_dict`の中の`keep_blob`という追加パラメータを含みます。更に、100回ごとの繰り返し　トレーニングプロセスの繰り返し100回ごとにログ出力するコードも追加します。
+
+```
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y_conv), reduction_indices=[1]))
 train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1))
@@ -243,7 +256,9 @@ for i in range(20000):
 
 print("test accuracy %g"%accuracy.eval(feed_dict={
     x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
-The final test set accuracy after running this code should be approximately 99.2%.
+```
+
+最後のテストでは、このコードの実行結果は正確さ99.2%となります。
 
 We have learned how to quickly and easily build, train, and evaluate a fairly sophisticated deep learning model using TensorFlow.
 
