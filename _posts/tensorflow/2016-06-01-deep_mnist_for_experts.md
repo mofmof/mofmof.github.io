@@ -1,15 +1,17 @@
 ---
 layout: blog
-title: 熟練者向けディープMNIST
+title: 熟練者のためのディープMNIST
 category: tensorflow
-tags: tensorflow,機械学習,machine learning,tensorflow tutorial,翻訳,Deep MNIST
-summary: TODO
+tags: tensorflow,機械学習,machine learning,tensorflow tutorial,翻訳,Deep MNIST,チュートリアル
+summary: もしあなたが既に他のディープラーニングのパッケージや、MNISTに馴染みがあるのなら、このチュートリアルはTensorFlowの簡潔な手引になるでしょう。
 author: aharada
 ---
 
-TensorFlowは大規模な数値計算を行うための強力なライブラリです。タスクのうちの一つ、ディープニューラルネットワークネットワークの実装とトレーニングを行うのに優れています。このチュートリアルでは、TensorFlowモデルでディープ畳み込みMIST分類の基礎的要素を学ぶことになります。
+TensorFlowは大規模な数値計算を行うための強力なライブラリです。TensorFlowはディープニューラルネットワークネットワークの実装・訓練を行うのに優れています。このチュートリアルでは、ディープ畳み込みMNIST分類の基礎的な構成要素を学んでいきます。
 
-このイントロダクションは、ニューラルネットワークとMNISTデータセットについて良く知っているものと仮定しています。もしあなたがそれらのバックグラウンドを持っていないのなら、ビギナー向けのイントロダクションを進めてください。始める前に必ずTensorFlowをインストールしてください。
+このイントロダクションでは、ニューラルネットワークとMNISTデータセットについて良く知っているものと仮定しています。もしそれらのバックグラウンドを持っていないのなら、[初心者向けのイントロダクション](https://www.tensorflow.org/versions/master/tutorials/mnist/beginners/index.html)を確認してください。始める前に必ずTensorFlowをインストールしてください。
+
+<!-- ここまで文章精査 -->
 
 ## セットアップ
 
