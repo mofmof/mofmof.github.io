@@ -9,35 +9,38 @@ author: aharada
 
 TensorFlowは大規模な数値計算を行うための強力なライブラリです。TensorFlowはディープニューラルネットワークネットワークの実装・訓練を行うのに優れています。このチュートリアルでは、ディープ畳み込みMNIST分類の基礎的な構成要素を学んでいきます。
 
-このイントロダクションでは、ニューラルネットワークとMNISTデータセットについて良く知っているものと仮定しています。もしそれらのバックグラウンドを持っていないのなら、[初心者向けのイントロダクション](https://www.tensorflow.org/versions/master/tutorials/mnist/beginners/index.html)を確認してください。始める前に必ずTensorFlowをインストールしてください。
+このイントロダクションでは、ニューラルネットワークとMNISTデータセットについて良く知っているものと仮定しています。もしそれらのバックグラウンドを持っていないのなら、[初心者向けのイントロダクション](https://www.tensorflow.org/versions/master/tutorials/mnist/beginners/index.html)を確認してください。始める前に必ず[TensorFlowをインストール](https://www.tensorflow.org/versions/master/get_started/os_setup.html)してください。
 
-<!-- ここまで文章精査 -->
 
 ## セットアップ
 
-モデルを作る前に、最初にMNISTデータセットをロードし、TensorFlowのセッションをスタートします。
+モデルを作る前に、まずMNISTデータセットをロードし、TensorFlowのセッションをスタートします。
 
-### MNISTデータをロードする
+### MNISTデータのロード
 
-便利なことに、MNISTデータセットを自動的にダウンロードしてインポートしてくれるスクリプトが含まれています。これは 'MNIST_data' ディレクトリを作成し、データファイルを保存します。
+TensorFlowにはMNISTデータセットを自動的にダウンロードしてインポートしてくれる[スクリプト](https://github.com/tensorflow/tensorflow/blob/r0.9/tensorflow/examples/tutorials/mnist/input_data.py)が含まれています。このスクリプトは「MNIST_data」ディレクトリを作成し、データファイルを保存します。
 
 ```
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 ```
 
-この`mnist`は軽量の分類データで、NumPy配列形式のトレーニングセット、バリデーションセット、テストセットです。また、以下で使うことになる、ミニバッチを繰り返し通す関数も提供しています。
+この`mnist`はNumPyの配列のような、訓練・検証・テストセットを持つ軽量のクラスです。また`mnist`はデータのミニバッチによって反復する関数を提供しており、以下で使うことになります。
 
-### TensorFlowのインタラクティブセッションをスタートする
+### TensorFlowインタラクティブセッションのスタート
 
-Tensorflowは計算処理をするのにバックエンドでC++を使っています。このバックエンドへのコネクションのことをことをセッションと呼んでいます。TensorFlowプログラムの慣例では、最初にグラフを作成し、セッションでそれを起動します。
+Tensorflowでの計算は、効率の良いC++バックエンドに依存しています。このバックエンドへのコネクションのことをセッションこと呼んでいます。TensorFlowプログラムの一般的な使い方は、最初にグラフを作成し、セッションでそれを起動します。
 
-その代わりにTensorFlowではコードを構造的に書くのに便利な`InteractiveSession`クラスを使います。これは、グラフを生成する処理とグラフを実行する処理のインタリーブを許可します。 これは特にIPythonのように双方向のやりとりがあるときに便利です。もしインタラクティブセッションを使わなかった場合、セッションの開始やグラフの出力の前に、全部のグラフ処理を組み立てなければならない。
+代わりにTensorFlowではよりコードを構造的に実装することを柔軟にする便利な`InteractiveSession`クラスを使います。これを使うことで、グラフを実行するのと同時に、[グラフを構築](https://www.tensorflow.org/versions/r0.9/get_started/basic_usage.html#the-computation-graph)する操作をはさみ込むことが可能になります。
+
+これはIPythonのように双方向にやりとりする状況で作業する際に時に特に便利です。もし`InteractiveSession`を使わない場合、セッションを開始し、[グラフを起動](https://www.tensorflow.org/versions/r0.9/get_started/basic_usage.html#launching-the-graph-in-a-session)する前に、全てのグラフを構築しなければならなりません。
 
 ```
 import tensorflow as tf
 sess = tf.InteractiveSession()
 ```
+
+<!-- ここまで文章精査 -->
 
 #### グラフの処理
 
