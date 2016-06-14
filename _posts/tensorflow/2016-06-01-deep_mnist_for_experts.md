@@ -218,7 +218,7 @@ h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
 
 #### ドロップアウト
 
-オーバーフィッティングを避けるために、読み出しレイヤーの前にドロップアウトを適用します。 ニューロンの出力はドロップアウトの間、保持される見込みの`placeholder`を作成します。トレーニング中にドロップアウトをオンにし、テスト中にそれをオフにすることが出来ます。TensoFlowの`tf.nn.dropout`は追加マスキングの中の出力ニューロンのスケーリングを自動的にハンドリングし、追加のスケーリングなしでドロップアウトを動かせます。
+オーバーフィッティングを避けるために、読み出しレイヤーの前にドロップアウトを適用します。 ニューロンの出力はドロップアウトの間、保持される見込みの`placeholder`を作成します。トレーニング中にドロップアウトをオンにし、テスト中にそれをオフにすることが出来ます。TensoFlowの`tf.nn.dropout`は追加マスキングの中の出力ニューロンのスケーリングを自動的にハンドリングし、追加のスケーリングなしでドロップアウトを動かせます(*1)。
 
 ```
 keep_prob = tf.placeholder(tf.float32)
@@ -260,6 +260,6 @@ print("test accuracy %g"%accuracy.eval(feed_dict={
 
 最後のテストでは、このコードの実行結果は正確さ99.2%となります。
 
-We have learned how to quickly and easily build, train, and evaluate a fairly sophisticated deep learning model using TensorFlow.
+これでTensorFlowを使って洗練されたディープラーニングのモデルを素早く簡単に構築・学習・評価する方法を学びました。
 
-1: For this small convolutional network, performance is actually nearly identical with and without dropout. Dropout is often very effective at reducing overfitting, but it is most useful when training very large neural networks. ↩
+*1: この小さな畳み込みニューラルネットワークでは、実際にはドロップアウトがあってもなくても近い性能になります。ドロップアウトはオーバーフィッティングを避けるためにたびたび有効ですが、規模の大きなニューラルネットワークを学習させる際にはより便利です。
