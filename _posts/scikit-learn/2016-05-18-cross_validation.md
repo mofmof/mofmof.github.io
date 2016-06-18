@@ -2,7 +2,7 @@
 layout: blog
 title: "3.1. クロスバリデーション: 推定関数の性能を評価する"
 category: scikit-learn
-tags: scikit-learn,機械学習,machine learning
+tags: [scikit-learn,機械学習,machine learning]
 summary: TODO
 author: aharada
 ---
