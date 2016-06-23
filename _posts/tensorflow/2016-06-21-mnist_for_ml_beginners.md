@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: MNIST For ML Beginners
+title: 機械学習初級者向けMNIST
 category: tensorflow
 tags: [tensorflow,機械学習,machine learning,tensorflow tutorial,翻訳,MNIST,チュートリアル]
 summary: If you're new to machine learning, we recommend starting here. You'll learn about a classic problem, handwritten digit classification (MNIST), and get a gentle introduction to multiclass classification.
@@ -22,3 +22,5 @@ MNISTはシンプルな画像認識データセットです。これは以下の
 </div>
 
 各画像にはラベルも含まれており、その画像がどの数値に対応するかを示しています。例えば上の画像には5, 0, 4, 1というラベルが対応します。
+
+このチュートリアルでは、画像を見てることでモデルを訓練し、どの数字であるかを予測させます。今回のゴールは最高水準のパフォーマンスの精巧なモデルを訓練することではなく(それはまたあとでコードをお見せします)、むしろTensorFlowにまず触れてみることです。まずは非常にシンプルなモデルであるソフトマックス回帰から始めて見ましょう。
