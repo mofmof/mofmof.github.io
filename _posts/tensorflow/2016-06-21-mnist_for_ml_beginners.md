@@ -26,3 +26,14 @@ MNISTはシンプルな画像認識データセットです。これは以下の
 このチュートリアルでは、画像を見てることでモデルを訓練し、どの数字であるかを予測させます。今回のゴールは最高水準のパフォーマンスの精巧なモデルを訓練することではなく(それはまたあとでコードをお見せします)、むしろTensorFlowにまず触れてみることです。まずは非常にシンプルなモデルであるソフトマックス回帰から始めて見ましょう。
 
 このチュートリアルでの実際のコードは非常に短く、たった3行で全ての興味深いことが起こります。しかし、これはどのようにTensorFlowが動作するのか　また機械学習の概要の背景を理解するために非常に重要なものです。このため、コードを通して丁寧に進めて行きます。
+
+## MNISTデータ
+
+MNISTデータはYann [LeCun氏のWEBサイト](http://yann.lecun.com/exdb/mnist/でホスティングされています。便利に進めるために、TensorFlowにはデータを自動的にダウンロード・インストールするるためのpythonコードが含まれています。下記のように[コード](https://github.com/tensorflow/tensorflow/blob/r0.9/tensorflow/examples/tutorials/mnist/input_data.py)をダウンロードしてインポートするか、シンプルにコピーペーストすることが出来ます。
+
+```
+from tensorflow.examples.tutorials.mnist import input_data
+mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+```
+
+ダウンロードされたデータは3つの部分に分割されており、55,000件の訓練データ(`mnist.train`)と、10,000件のテストデータ('mnist.test')と、5,000件の検証データ('mnist.validation')で構成されています。この分割は非常に重要で、it's essential in machine learning that we have separate data which we don't learn from so that we can make sure that what we've learned actually generalizes!
