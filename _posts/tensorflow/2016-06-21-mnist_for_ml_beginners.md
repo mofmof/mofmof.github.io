@@ -18,7 +18,7 @@ author: aharada
 MNISTはシンプルな画像認識データセットです。これは以下のような手書きの数字画像から構成されます。
 
 <div style="width:40%; margin:auto; margin-bottom:10px; margin-top:20px;">
-  ![](/images/tensorflow/2016-06-21-mnist_for_ml_beginners/MNIST.png)
+  <img style="width:100%" src="/images/tensorflow/2016-06-21-mnist_for_ml_beginners/MNIST.png">
 </div>
 
 各画像にはラベルも含まれており、その画像がどの数値に対応するかを示しています。例えば上の画像には5, 0, 4, 1というラベルが対応します。
@@ -43,5 +43,7 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 各画像は28x28ピクセルの画像です。これは大きい次元数の数値配列として解釈出来ます。
 
 <div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;">
-  ![](/images/tensorflow/2016-06-21-mnist_for_ml_beginners/MNIST-Matrix.png)
+  <img style="width:100%" src="/images/tensorflow/2016-06-21-mnist_for_ml_beginners/MNIST-Matrix.png">
 </div>
+
+この28x28のベクトルが入った配列を平坦にして784の数値にすることが出来る。It doesn't matter how we flatten the array, as long as we're consistent between images. From this perspective, the MNIST images are just a bunch of points in a 784-dimensional vector space, with a very rich structure (warning: computationally intensive visualizations).
