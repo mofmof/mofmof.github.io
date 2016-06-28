@@ -36,4 +36,6 @@ from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 ```
 
-ダウンロードされたデータは3つの部分に分割されており、55,000件の訓練データ(`mnist.train`)と、10,000件のテストデータ('mnist.test')と、5,000件の検証データ('mnist.validation')で構成されています。この分割は非常に重要で、it's essential in machine learning that we have separate data which we don't learn from so that we can make sure that what we've learned actually generalizes!
+ダウンロードされたデータは3つの部分に分割されており、55,000件の訓練データ(`mnist.train`)と、10,000件のテストデータ('mnist.test')と、5,000件の検証データ('mnist.validation')で構成されています。この分割は非常に重要で、これは機械学習にとって学習していない区分けされたデータは必要不可欠で、実際に一般化を学習出来ていることを確認出来ます！
+
+先に述べたように、全てのMNISTデータは2つの部分で出来ています。手書き数字画像と、それに対応するラベルです。この画像の方を"xs"、ラベルの方を"ys"とします。Both the training set and test set contain xs and ys, for example the training images are mnist.train.images and the train labels are mnist.train.labels.
