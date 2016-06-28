@@ -18,7 +18,7 @@ author: aharada
 MNISTはシンプルな画像認識データセットです。これは以下のような手書きの数字画像から構成されます。
 
 <div style="width:40%; margin:auto; margin-bottom:10px; margin-top:20px;">
-  <img style="width:100%" src="https://www.tensorflow.org/versions/r0.9/images/MNIST.png">
+  ![](/images/tensorflow/2016-06-21-mnist_for_ml_beginners/MNIST.png)
 </div>
 
 各画像にはラベルも含まれており、その画像がどの数値に対応するかを示しています。例えば上の画像には5, 0, 4, 1というラベルが対応します。
@@ -38,4 +38,10 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
 ダウンロードされたデータは3つの部分に分割されており、55,000件の訓練データ(`mnist.train`)と、10,000件のテストデータ('mnist.test')と、5,000件の検証データ('mnist.validation')で構成されています。この分割は非常に重要で、これは機械学習にとって学習していない区分けされたデータは必要不可欠で、実際に一般化を学習出来ていることを確認出来ます！
 
-先に述べたように、全てのMNISTデータは2つの部分で出来ています。手書き数字画像と、それに対応するラベルです。この画像の方を"xs"、ラベルの方を"ys"とします。Both the training set and test set contain xs and ys, for example the training images are mnist.train.images and the train labels are mnist.train.labels.
+先に述べたように、全てのMNISTデータは2つの部分で出来ています。手書き数字画像と、それに対応するラベルです。この画像の方を"xs"、ラベルの方を"ys"とします。訓練セットとテストセットの両方(訓練する画像`mnist.train.images`とそのラベル`mnist.train.labels`)をxsとysに含みます。
+
+各画像は28x28ピクセルの画像です。これは大きい次元数の数値配列として解釈出来ます。
+
+<div style="width:50%; margin:auto; margin-bottom:10px; margin-top:20px;">
+  ![](/images/tensorflow/2016-06-21-mnist_for_ml_beginners/MNIST-Matrix.png)
+</div>
