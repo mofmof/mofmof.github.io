@@ -1,113 +1,123 @@
 ---
 layout: blog
-title: 熟練者向けディープMNIST
+title: 熟練者のためのディープMNIST
 category: tensorflow
-tags: tensorflow,機械学習,machine learning,tensorflow tutorial,翻訳,Deep MNIST
-summary: TODO
+tags: [tensorflow,機械学習,machine learning,tensorflow tutorial,翻訳,Deep MNIST,チュートリアル]
+summary: もしあなたが既に他のディープラーニングのパッケージや、MNISTに馴染みがあるのなら、このチュートリアルはTensorFlowの簡潔な手引になるでしょう。
 author: aharada
 ---
 
-TensorFlowは大規模な数値計算を行うための強力なライブラリです。タスクのうちの一つ、ディープニューラルネットワークネットワークの実装とトレーニングを行うのに優れています。このチュートリアルでは、TensorFlowモデルでディープ畳み込みMIST分類の基礎的要素を学ぶことになります。
+*※このエントリはTensorFlowの公式ドキュメント「[Deep MNIST for Experts](https://www.tensorflow.org/versions/r0.9/tutorials/mnist/pros/index.html)」を翻訳したものです*
 
-このイントロダクションは、ニューラルネットワークとMNISTデータセットについて良く知っているものと仮定しています。もしあなたがそれらのバックグラウンドを持っていないのなら、ビギナー向けのイントロダクションを進めてください。始める前に必ずTensorFlowをインストールしてください。
+---
+
+TensorFlowは大規模な数値計算を行うための強力なライブラリです。TensorFlowはディープニューラルネットワークネットワークの実装・訓練を行うのに優れています。このチュートリアルでは、ディープ畳み込みMNIST分類の基礎的な構成要素を学んでいきます。
+
+このイントロダクションでは、ニューラルネットワークとMNISTデータセットについて良く知っているものと仮定しています。もしそれらのバックグラウンドを持っていないのなら、[初心者向けのイントロダクション](https://www.tensorflow.org/versions/master/tutorials/mnist/beginners/index.html)を確認してください。始める前に必ず[TensorFlowをインストール](https://www.tensorflow.org/versions/master/get_started/os_setup.html)してください。
+
 
 ## セットアップ
 
-モデルを作る前に、最初にMNISTデータセットをロードし、TensorFlowのセッションをスタートします。
+モデルを作る前に、まずMNISTデータセットをロードし、TensorFlowのセッションをスタートします。
 
-### MNISTデータをロードする
+### MNISTデータのロード
 
-便利なことに、MNISTデータセットを自動的にダウンロードしてインポートしてくれるスクリプトが含まれています。これは 'MNIST_data' ディレクトリを作成し、データファイルを保存します。
+TensorFlowにはMNISTデータセットを自動的にダウンロードしてインポートしてくれる[スクリプト](https://github.com/tensorflow/tensorflow/blob/r0.9/tensorflow/examples/tutorials/mnist/input_data.py)が含まれています。このスクリプトは「MNIST_data」ディレクトリを作成し、データファイルを保存します。
 
 ```
 from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 ```
 
-この`mnist`は軽量の分類データで、NumPy配列形式のトレーニングセット、バリデーションセット、テストセットです。また、以下で使うことになる、ミニバッチを繰り返し通す関数も提供しています。
+この`mnist`はNumPyの配列のような、訓練・検証・テストセットを持つ軽量のクラスです。また`mnist`はデータのミニバッチによって反復する関数を提供しており、以下で使うことになります。
 
-### TensorFlowのインタラクティブセッションをスタートする
+### TensorFlowインタラクティブセッションのスタート
 
-Tensorflowは計算処理をするのにバックエンドでC++を使っています。このバックエンドへのコネクションのことをことをセッションと呼んでいます。TensorFlowプログラムの慣例では、最初にグラフを作成し、セッションでそれを起動します。
+Tensorflowでの計算は、効率の良いC++バックエンドに依存しています。このバックエンドへのコネクションのことをセッションこと呼んでいます。TensorFlowプログラムの一般的な使い方は、最初にグラフを作成し、セッションでそれを起動します。
 
-その代わりにTensorFlowではコードを構造的に書くのに便利な`InteractiveSession`クラスを使います。これは、グラフを生成する処理とグラフを実行する処理のインタリーブを許可します。 これは特にIPythonのように双方向のやりとりがあるときに便利です。もしインタラクティブセッションを使わなかった場合、セッションの開始やグラフの出力の前に、全部のグラフ処理を組み立てなければならない。
+代わりにTensorFlowではよりコードを構造的に実装することを柔軟にする便利な`InteractiveSession`クラスを使います。これを使うことで、グラフを実行するのと同時に、[グラフを構築](https://www.tensorflow.org/versions/r0.9/get_started/basic_usage.html#the-computation-graph)する操作をはさみ込むことが可能になります。
+
+これはIPythonのように双方向にやりとりする状況で作業する際に時に特に便利です。もし`InteractiveSession`を使わない場合、セッションを開始し、[グラフを起動](https://www.tensorflow.org/versions/r0.9/get_started/basic_usage.html#launching-the-graph-in-a-session)する前に、全てのグラフを構築しなければならなりません。
 
 ```
 import tensorflow as tf
 sess = tf.InteractiveSession()
 ```
 
-#### グラフの処理
 
-Pythonで効率的な数値計算をするためには、一般的にはNumPyのように、コストが高い行列の掛け算を行えるライブラリなど、別言語で実装された非常に処理効率の良いコードを使います。残念なことに、いまだ全ての操作において、処理をPythonに戻す際に多くのオーバーヘッドが発生してしまいます。このオーバーヘッドは、GPU上で処理を走らせたい時や分散処理をしたい場合に特に悪く、データ転送するために高い処理コストがかかってしまうことが起こり得る。
+#### グラフの計算
 
-また、TensorFlowはPythonの外側でこの重い処理を行いますが、ステップを踏んで、このオーバーヘッドを避けていきます。 Pythonから独立してコストの高い処理を走らせる代わりに、TensorFlowでは 完全にPythonの外側で実行される双方向操作のグラフ描写を許可します。このアプローチはTheanoやTorchを使うとの同様です。
+Pythonで効率的な数値計算をするためには、一般的にはコストが高い行列の掛け算を行える、別言語で実装された非常に処理効率の良いコードを使うNumPyのようなライブラリを使用します。残念なことに、いまだ全ての操作において、処理をPythonに戻す際に多くのオーバーヘッドが発生してしまいます。GPU上で処理を走らせたい時や分散処理をしたい場合に特に悪く、データ転送するために高い処理コストがかかってしまうことが起こり得ます。
 
-Pythonコードの役割は、外側でグラフ処理を構築するために、グラフ処理するための部品の実行を命令することです。それでは、グラフ処理の基本的になやり方の詳細を見ていきましょう。
+TensorFlowはPythonの外側でこの重い処理を行いますが、このオーバーヘッドを避ける方法を取ります。Pythonから独立してコストの高い処理を走らせる代わりに、TensorFlowでは 完全にPythonの外側で実行される双方向操作のグラフとして記述出来ます。このアプローチはTheanoやTorchを使うとの同様です。
+
+Pythonコードの役割は、外側でグラフ計算を構築するために、実行すべきグラフ計算の部品を記述することです。[グラフ計算](https://www.tensorflow.org/versions/r0.9/get_started/basic_usage.html#the-computation-graph)の[基本的な使用方法](https://www.tensorflow.org/versions/r0.9/get_started/basic_usage.html)のセクションの詳細を参照してください。
 
 ## ソフトマックス回帰モデルの構築
 
-このセクションでは、単一の線形レイヤーのソフトマックス回帰モデルの構築について扱います。次のセクションでは、これを拡張した、マルチレイヤーの畳み込みネットワークを使ったSoftmax回帰を扱います。
+このセクションでは、単一の線形レイヤーのソフトマックス回帰モデルの構築について扱います。次のセクションでは、これを拡張した、多層畳み込みネットワークでのソフトマックス回帰について扱います。
 
 ### プレースホルダ
 
-入力画像と出力するクラスのためのノードの作成することにより、グラフ処理の構築を始めます。
+入力画像と出力するクラスのためのノードの作成することにより、グラフ計算の構築を始めます。
 
 ```
 x = tf.placeholder(tf.float32, shape=[None, 784])
 y_ = tf.placeholder(tf.float32, shape=[None, 10])
 ```
 
-この時点では`x`と`y_`には特定の値は入っていません。むしろ、これらは`プレースホルダ`であり、TensolFlowが処理を実行するタイミングで入力されます。
+この時点では`x`と`y_`には特定の値は入っていません。これらは`プレースホルダ`であり、TensolFlowが処理を実行するタイミングで入力される値です。
 
-入力画像`x`は二次元の浮動小数点数を持つテンソルから成り立つ。これには`[None, 784]`という抽象的な型を代入します。`784`というのはMNIST画像の数で、`None`は一括処理するサイズにともなって、いくつかの値が入ることを示します。ターゲットの出力クラスの`y_`は2次元のテンソルから成り立ち、MNIST画像がどの数字であるかを示す、one-hot(1が1つで残りが全て0である)な10次元のベクトルです。
 
-`shape`は任意の引数ですが、テンソルのシェイプに一致していないことが原因のバグを自動的にキャッチされます。
+入力画像`x`は浮動小数点数を持つ二次元のテンソルからなります。これには`[None, 784]`という抽象的な型を割り当てます。`784`というのはMNIST画像の次元で、`None`はバッチサイズと対応し、任意の値が入ることを示します。ターゲットの出力クラスの`y_`は二次元のテンソルから成り立ち、MNIST画像がどの数字であるかを示す、one-hot(1が1つで残りが全て0である)な10次元のベクトルです。
+
+`shape`は任意の引数ですが、これを指定するとテンソルのシェイプに一致していないことが原因のバグを自動的にキャッチすることが出来ます。
 
 ### 変数
 
-まずは重みである`W`とバイアスである`b`を定義します。追加入力のように扱うことが想像できますが、TensorFlowでは`Variable`というよりよい方法があります。`Variable`は TensorFlowのグラフ処理で扱われる値です。これは処理において利用・修正することが出来ます。機械学習アプリケーションでは、たいてい1つはモデルの変数パラメータを持っているものです。
+まずは重みである`W`とバイアスである`b`を定義します。追加入力のように扱うことが想像できますが、TensorFlowでは`Variable`というよりよい方法があります。`Variable`は TensorFlowのグラフ計算内にある値です。これは計算により利用・修正することが出来ます。機械学習アプリケーションでは、一般的にはモデルのパラメータを`Variable`が持っています。
 
 ```
 W = tf.Variable(tf.zeros([784,10]))
 b = tf.Variable(tf.zeros([10]))
 ```
 
-`tf.Variable`を呼び出して各パラメータを初期化を渡します。このケースでは、`W`と`b`ともにゼロで埋めた値で初期化しています。`W`は784x10次元の行列（つまり784個の入力と10の出力がある）で`b`は10次元のベクトル（10の分類）です。
+`tf.Variable`を呼び出して各パラメータの初期値を渡します。このケースでは、`W`と`b`ともにゼロで埋めたテンソルで初期化しています。`W`は784x10次元の行列（つまり784のフィーチャーと10の出力があるので）で`b`は10次元のベクトル（10の分類があるので）です。
 
-`Variable`sはセッションの中で使うことができ、必ず初期化しなければなりません。 このステップでは既に指定された初期値（この場合はテンソルはゼロ埋めされている）をとり、それぞれの変数に割り当てます。これはそれぞれの変数について一度に行うことが出来ます。
+`Variable`sはセッションの中で使うことができ、必ず初期化しなければなりません。 このステップでは既に指定された初期値（この場合はテンソルはゼロ埋められている）をとり、それぞれの変数に割り当てます。これはそれぞれの変数について一度に行うことが出来ます。
 
 ```
 sess.run(tf.initialize_all_variables())
 ```
 
-### 予測とコストファンクション
+### 予測とコスト関数
 
-回帰モデルを実装していきます。これはなんと一行で実装出来ます！ベクトル化された入力画像と重みの行列の`w`を掛け、バイアス`b`を足して、各クラスごとのsoftmax確率を計算します。
+これで回帰モデルを実装出来るようになりました。これはなんと一行で実装出来ます！ベクトル化された入力画像の`x`と重みの行列の`W`を掛け、バイアス`b`を足して、各クラスごとのsoftmax確率を計算します。
 
 ```
 y = tf.nn.softmax(tf.matmul(x,W) + b)
 ```
 
-このコストファンクションでトレーニングすることで簡単に最小化することが出来ます。コストファンクションはターゲットとモデルの予測との間の交差エントロピーになります。
+訓練中にに最小化されたコスト関数は、簡単に指定することが出来ます。コスト関数はターゲットとモデルの予測との間の交差エントロピーになります。
 
 ```
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))
 ```
 
-`tf.reduce_sum`は全てのクラスにまたがって合計し、`tf.reduce_mean`はそれらの平均をとります。
+`tf.reduce_sum`は全てのクラスにまたがって合計し、`tf.reduce_mean`はそれらの平均をとることに注意してください。
 
-## モデルを訓練する
+## モデルの訓練
+<!-- ここまで文章精査 -->
 
-これまでに訓練するコストファンクションを定義しました。これはTensorFlowを使った単純な訓練の仕方の例です。TensorFlowは全体のグラフ処理を知っているため、勾配のコストを自動的に識別することが出来る。TensorFlowは色々の最適化されたアルゴリズムを標準で組み込んでいます。この例は、勾配の大きい最急降下法で、降りるステップの長さが0.5の交差エントロピーです。
+これまでに訓練するコスト関数を定義しましたので、TensorFlowを使った訓練の仕方は簡単です。TensorFlowは全体のグラフ計算を知っているため、各変数に関する勾配のコストを見つけるために自動的に識別することが出来ます。TensorFlowは様々な[最適化されたアルゴリズムを標準で組み込んでいます](https://www.tensorflow.org/versions/r0.9/api_docs/python/train.html#optimizers)。この例では、交差エントロピーを下降させるために0.5のステップの急な勾配の最急降下法を使用しています。
 
 ```
 train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 ```
 
-TensorFlowでは実際にグラフ処理のために一行を追加します。これらの操作には1回の勾配計算が含まれており、パラメータを処理し更新します。
+TensorFlowが実際にこの一行をを追加することは、グラフ計算に新しい操作を追加することです。これらの操作には勾配降下を計算し、パラメータの更新ステップを計算し、パラメータに更新ステップを適用する操作が含まれています。
 
-戻り値の`train_step`は最急降下法によって更新されるパラメータです。モデルは、何度も`train_step`を繰り返し実行することにより完成されます。
+実行時の戻り値`train_step`は勾配降下の更新をパラメータに適用します。モデルは、何度も`train_step`を繰り返し実行することにより完成されます。
 
 ```
 for i in range(1000):
@@ -115,29 +125,41 @@ for i in range(1000):
   train_step.run(feed_dict={x: batch[0], y_: batch[1]})
 ```
 
-トレーニングの反復一回で、50件のトレーニングセットを読み込みます。`train_step`の操作では`feed_dict`を使うことでプレースホルダである`x`と`y_`を訓練セットの内容で置き換えます。`feed_dict`を使うことでグラフ処理の中のテンソルを置き換えることが出来ます。これはプレースホルダだけに限定されません。
+各訓練の反復で、50件のトレーニングセットを読み込みます。`feed_dict`を使い、プレースホルダのテンソルである`x`と`y_`を訓練セットの内容で置き換え、`train_step`の操作を実行します。`feed_dict`を使うことでグラフ計算の中のテンソルを置き換えることが出来ることに注意してください(これはプレースホルダだけに限定されません)。
 
 ### モデルの評価
 
-モデルはうまく振舞っていますか？
+モデルはどれくらいうまく振舞っていますか？
 
-最初に、正しいラベルを予測されたことを理解します。 `tf.argmax`は非常にに便利な関数で精度の高いエントリーのインデックスを与えてくれます。 例えば、`tf.argmax(y,1)`はモデルが最も可能性が高いと考えているラベルで、`tf.argmax(y_,1)`は`true`のラベルです。We can use tf.equal to check if our prediction matches the truth.
+まずは、どこで正しいラベルが予測されたか見つけましょう。`tf.argmax`は非常にに便利な関数で精度の高いエントリーのインデックスを与えてくれます。 例えば、`tf.argmax(y,1)`はモデルが最も可能性が高いと考えているラベルで、`tf.argmax(y_,1)`は正しいラベルです。`tf.equal`は予測が正しいかどうかをチェックするために使うことが出来ます。
 
+```
 correct_prediction = tf.equal(tf.argmax(y,1), tf.argmax(y_,1))
-That gives us a list of booleans. To determine what fraction are correct, we cast to floating point numbers and then take the mean. For example, [True, False, True, True] would become [1,0,1,1] which would become 0.75.
+```
 
+結果は真偽値のリストを返します。どの部分が正しいかを決定するために、浮動小数点数にキャストして平均値を取ります。例えば、`[True, False, True, True]`は`[1,0,1,1]`になり`0.75`となります。
+
+```
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
-Finally, we can evaluate our accuracy on the test data. This should be about 92% correct.
+```
 
+最後に、テストデータにおける正確さを評価すると92%になります。
+
+```
 print(accuracy.eval(feed_dict={x: mnist.test.images, y_: mnist.test.labels}))
-Build a Multilayer Convolutional Network
+```
 
-Getting 91% accuracy on MNIST is bad. It's almost embarrassingly bad. In this section, we'll fix that, jumping from a very simple model to something moderately sophisticated: a small convolutional neural network. This will get us to around 99.2% accuracy -- not state of the art, but respectable.
+## 多層畳み込みネットワークの構築
 
-Weight Initialization
+MNISTで91%の正確さは、はずかしいくらいに悪い精度です。このセクションでは、非常にシンプルなモデルから洗練されたモデルへと改善させます。小さな畳み込みニューラルネットワークで99.2%の正確さを実現させます。これは最高水準ではありませんが、立派な精度です。
 
-To create this model, we're going to need to create a lot of weights and biases. One should generally initialize weights with a small amount of noise for symmetry breaking, and to prevent 0 gradients. Since we're using ReLU neurons, it is also good practice to initialize them with a slightly positive initial bias to avoid "dead neurons." Instead of doing this repeatedly while we build the model, let's create two handy functions to do it for us.
+### 重みの初期化
 
+このモデルを作るためには、たくさんの重みとバイアスを作らなければなりません。一般的には対称性を壊し0勾配を避けるために、少しのノイズを含んだを値で重みを初期化する必要があります。
+
+ReLUニューロンを使い始めて以来、小さい正の値でバイアスを初期化することもまた「死んだニューロン」を避けるための良いプラクティスです。繰り返しモデルを構築する代わりに、使いやすい2つの関数を実装してみましょう。
+
+```
 def weight_variable(shape):
   initial = tf.truncated_normal(shape, stddev=0.1)
   return tf.Variable(initial)
@@ -145,65 +167,92 @@ def weight_variable(shape):
 def bias_variable(shape):
   initial = tf.constant(0.1, shape=shape)
   return tf.Variable(initial)
-Convolution and Pooling
+```
 
-TensorFlow also gives us a lot of flexibility in convolution and pooling operations. How do we handle the boundaries? What is our stride size? In this example, we're always going to choose the vanilla version. Our convolutions uses a stride of one and are zero padded so that the output is the same size as the input. Our pooling is plain old max pooling over 2x2 blocks. To keep our code cleaner, let's also abstract those operations into functions.
+### 畳み込みとプーリング
 
+TensorFlowはたくさんの柔軟な畳み込みとプーリング処理も提供しています。どうやって境界を扱うのでしょうか？歩幅のサイズは？この例では、常に普通なバージョンを選択します。畳み込みは、1の歩幅を使用し、出力が入力とおなじサイズになるようにゼロパディングします。プーリングは2x2ブロックの単純なold max poolingです。綺麗なコードを保つために、そのような抽象的な処理も関数にして実装しましょう。
+
+```
 def conv2d(x, W):
   return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
 
 def max_pool_2x2(x):
   return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
                         strides=[1, 2, 2, 1], padding='SAME')
-First Convolutional Layer
+```
 
-We can now implement our first layer. It will consist of convolution, followed by max pooling. The convolutional will compute 32 features for each 5x5 patch. Its weight tensor will have a shape of [5, 5, 1, 32]. The first two dimensions are the patch size, the next is the number of input channels, and the last is the number of output channels. We will also have a bias vector with a component for each output channel.
+### 最初の畳み込みレイヤー
 
+今これで最初のレイヤーを実装出来るようになりました。これは畳み込みとmax poolingから構成されます。この畳み込みは各5x5のパッチの32の特徴で計算されます。この重みテンソルは`[5, 5, 1, 32]`のシェイプを持ちます。最初の2つの次元はパッチサイズで、次は入力チャネルの数で、最後は出力チャネルの数です。また、各出力チャネルの要素にはバイアスのベクトルを持つことになります。
+
+```
 W_conv1 = weight_variable([5, 5, 1, 32])
 b_conv1 = bias_variable([32])
-To apply the layer, we first reshape x to a 4d tensor, with the second and third dimensions corresponding to image width and height, and the final dimension corresponding to the number of color channels.
+```
 
+この層に適用するためには、まず最初に`x`を4次元のテンソルに変形します。2、3次元は画像の横幅・縦幅に対応し、最後の次元はカラーチャネルの数に対応します。
+
+```
 x_image = tf.reshape(x, [-1,28,28,1])
-We then convolve x_image with the weight tensor, add the bias, apply the ReLU function, and finally max pool.
+```
 
+`x_image`と重みテンソルを畳み込み、バイアスを加算したものに、ReLU関数を適用し、最後にmax_poolを実行します。
+
+```
 h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
 h_pool1 = max_pool_2x2(h_conv1)
-Second Convolutional Layer
+```
 
-In order to build a deep network, we stack several layers of this type. The second layer will have 64 features for each 5x5 patch.
+### 2つ目の畳み込み層
 
+ディープネットワークを構築するためには、このタイプの層を積み重ねます。2つ目の層は5x5のパッチの64の特徴を持つことになります。
+
+```
 W_conv2 = weight_variable([5, 5, 32, 64])
 b_conv2 = bias_variable([64])
 
 h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
 h_pool2 = max_pool_2x2(h_conv2)
-Densely Connected Layer
+```
 
-Now that the image size has been reduced to 7x7, we add a fully-connected layer with 1024 neurons to allow processing on the entire image. We reshape the tensor from the pooling layer into a batch of vectors, multiply by a weight matrix, add a bias, and apply a ReLU.
+### 密に接続された層
 
+画像サイズを7x7に減少させ、画像全体から処理することを出来るようにするために1024のニューロンを持つ、完全に接続された層を追加します。プーリング層から取り出したテンソルをベクトルのバッチに形を変えて、重みの行列を掛け、バイアスを加算し、ReLUを適用します。
+
+```
 W_fc1 = weight_variable([7 * 7 * 64, 1024])
 b_fc1 = bias_variable([1024])
 
 h_pool2_flat = tf.reshape(h_pool2, [-1, 7*7*64])
 h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
-Dropout
+```
 
-To reduce overfitting, we will apply dropout before the readout layer. We create a placeholder for the probability that a neuron's output is kept during dropout. This allows us to turn dropout on during training, and turn it off during testing. TensorFlow's tf.nn.dropout op automatically handles scaling neuron outputs in addition to masking them, so dropout just works without any additional scaling.1
+#### ドロップアウト
 
+オーバーフィッティングを避けるために、読み出し層の前にドロップアウトを適用します。 ニューロンの出力はドロップアウトの間、保持される見込みのプレースホルダを作成します。訓練中にドロップアウトをオンにし、テスト中にそれをオフにすることが出来るようになります。TensoFlowの`tf.nn.dropout`はそれらのマスキングに加えて、ニューロン出力のスケーリングを自動的に処理し、ドロップアウトは追加のスケーリングなしに動作します(*1)。
+
+```
 keep_prob = tf.placeholder(tf.float32)
 h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)
-Readout Layer
+```
 
-Finally, we add a softmax layer, just like for the one layer softmax regression above.
+### 読み出し層
 
+最後に、上記の単層ソフトマックス回帰のような、ソフトマックス層を追加します。
+
+```
 W_fc2 = weight_variable([1024, 10])
 b_fc2 = bias_variable([10])
 
 y_conv=tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)
-Train and Evaluate the Model
+```
 
-How well does this model do? To train and evaluate it we will use code that is nearly identical to that for the simple one layer SoftMax network above. The differences are that: we will replace the steepest gradient descent optimizer with the more sophisticated ADAM optimizer; we will include the additional parameter keep_prob in feed_dict to control the dropout rate; and we will add logging to every 100th iteration in the training process.
+### モデルの訓練と評価
 
+このモデルはどれだけの良く振る舞っているでしょうか？モデルの訓練と評価をするためには、上記のような単層ソフトマックスネットワークとほとんど同じコードを使います。異なる点は次の通りです。急な最急降下法のオプティマイザから、さらに洗練されたADAMオプティマイザに置き換え、ドロップアウト率をコントロールする`keep_blob`という追加パラメータを`feed_dict`に含め、更に、訓練プロセスの繰り返し100回ごとにログ出力するコードも追加します。
+
+```
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y_conv), reduction_indices=[1]))
 train_step = tf.train.AdamOptimizer(1e-4).minimize(cross_entropy)
 correct_prediction = tf.equal(tf.argmax(y_conv,1), tf.argmax(y_,1))
@@ -219,8 +268,10 @@ for i in range(20000):
 
 print("test accuracy %g"%accuracy.eval(feed_dict={
     x: mnist.test.images, y_: mnist.test.labels, keep_prob: 1.0}))
-The final test set accuracy after running this code should be approximately 99.2%.
+```
 
-We have learned how to quickly and easily build, train, and evaluate a fairly sophisticated deep learning model using TensorFlow.
+最終的なテストでは、このコードの実行結果は正確さ99.2%となります。
 
-1: For this small convolutional network, performance is actually nearly identical with and without dropout. Dropout is often very effective at reducing overfitting, but it is most useful when training very large neural networks. ↩
+これでTensorFlowを使って洗練されたディープラーニングのモデルを素早く簡単に構築・学習・評価する方法を学びました。
+
+*1: この小さな畳み込みニューラルネットワークでは、実際にはドロップアウトがあってもなくても近い性能になります。ドロップアウトはオーバーフィッティングを避けるためにたびたび有効ですが、規模の大きなニューラルネットワークを学習させる際にはより便利です。
