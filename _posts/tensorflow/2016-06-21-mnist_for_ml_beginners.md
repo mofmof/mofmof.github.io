@@ -46,4 +46,6 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
   <img style="width:100%" src="/images/tensorflow/2016-06-21-mnist_for_ml_beginners/MNIST-Matrix.png">
 </div>
 
-この28x28のベクトルが入った配列を平坦にして784の数値にすることが出来る。It doesn't matter how we flatten the array, as long as we're consistent between images. From this perspective, the MNIST images are just a bunch of points in a 784-dimensional vector space, with a very rich structure (warning: computationally intensive visualizations).
+この28x28のベクトルが入った配列を平坦にして784の数値にすることが出来る。これは、画像が一定である限り、どのように配列を平坦にするかという問題ではありません。この観点から見ると、MNIST画像は[非常に豊富な構造](http://colah.github.io/posts/2014-10-Visualizing-MNIST/)を持つ784次元のポイントを束ねたベクトル空間です(注意：計算集約的な視覚化)。
+
+データの平坦化は、画像の2次元構造の情報を破棄します。これは悪いことでしょうか？視覚化する最適な方法は、この構造を利用しすることです。これついてはチュートリアルの後のほうで扱いますが、ソフトマックス回帰ではないシンプル方法はここでも使います。
