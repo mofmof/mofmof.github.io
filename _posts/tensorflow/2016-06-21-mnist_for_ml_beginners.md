@@ -49,3 +49,11 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 この28x28のベクトルが入った配列を平坦にして784の数値にすることが出来る。これは、画像が一定である限り、どのように配列を平坦にするかという問題ではありません。この観点から見ると、MNIST画像は[非常に豊富な構造](http://colah.github.io/posts/2014-10-Visualizing-MNIST/)を持つ784次元のポイントを束ねたベクトル空間です(注意：計算集約的な視覚化)。
 
 データの平坦化は、画像の2次元構造の情報を破棄します。これは悪いことでしょうか？視覚化する最適な方法は、この構造を利用しすることです。これついてはチュートリアルの後のほうで扱いますが、ソフトマックス回帰ではないシンプル方法はここでも使います。
+
+結果`mnist.train.images`はテンソル(N次元配列)と`[55000, 784]`のシェイプです。最初の次元は画像、次の次元は各画像のピクセルです。テンソル内の各エントリは、いずれかの画像のいずれかのピクセルの色の濃さを0〜1の値で表したものです。
+
+<div style="width:40%; margin:auto; margin-bottom:10px; margin-top:20px;">
+  <img style="width:100%" src="/images/tensorflow/2016-06-21-mnist_for_ml_beginners/mnist-train-xs.png">
+</div>
+
+MNISTのラベルに対応するのは、画像に割り振られた数値で0〜9の値です。 For the purposes of this tutorial, we're going to want our labels as "one-hot vectors". A one-hot vector is a vector which is 0 in most dimensions, and 1 in a single dimension. In this case, the nth digit will be represented as a vector which is 1 in the nth dimensions. For example, 3 would be [0,0,0,1,0,0,0,0,0,0]. Consequently, mnist.train.labels is a [55000, 10] array of floats.
