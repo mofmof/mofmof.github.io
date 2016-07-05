@@ -2,7 +2,7 @@
 layout: blog
 title: IBM Bluemix Watson君で日本語の対話サンプルを試してみる
 category: blog
-tags: [Bluemix,IBM,Waton,Dialog,対話,チャットbot]  
+tags: [Bluemix,IBM,Waton,Dialog,対話,チャットbot,Machine Learning,機械学習]  
 summary: 今週末にチャットbotハッカソンに参加することになったので、IBM Bluemix Watson君の対話APIを試してみます。
 image: /images/blog/2016-07-05-bluemix-watson/result2.png
 author: aharada
