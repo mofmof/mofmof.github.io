@@ -8,6 +8,8 @@ image: /images/blog/2016-07-05-bluemix-watson/result2.png
 author: aharada
 ---
 
+![](../images/blog/2016-07-05-bluemix-watson/result2.png)
+
 今週末にチャットbotハッカソンに参加することになったので、IBM Bluemix Watson君の対話APIを試してみます。
 
 こちらのQiita記事を参考にさせていただいた。これ見れば全部わかる。
