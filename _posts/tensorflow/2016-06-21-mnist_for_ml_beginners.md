@@ -92,4 +92,8 @@ $$y = \text{softmax}(\text{evidence})$$
 
 $$\text{softmax}(x) = \text{normalize}(\exp(x))$$
 
-If you expand that equation out, you get:
+この式を展開するとこのようになります。
+
+$$\text{softmax}(x)_i = \frac{\exp(x_i)}{\sum_j \exp(x_j)}$$
+
+ですが、しばしば最初にソフトマックスを考えることの助けになります。べき乗は入力し正規化します。べき乗する方法は、もう一つのエビデンスの単位は、仮説の乗法に与えられた重みが増加します。And conversely, having one less unit of evidence means that a hypothesis gets a fraction of its earlier weight. No hypothesis ever has zero or negative weight. Softmax then normalizes these weights, so that they add up to one, forming a valid probability distribution. (To get more intuition about the softmax function, check out the section on it in Michael Nielsen's book, complete with an interactive visualization.)
