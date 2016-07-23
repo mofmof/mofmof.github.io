@@ -96,4 +96,6 @@ $$\text{softmax}(x) = \text{normalize}(\exp(x))$$
 
 $$\text{softmax}(x)_i = \frac{\exp(x_i)}{\sum_j \exp(x_j)}$$
 
-ですが、しばしば最初にソフトマックスを考えることの助けになります。べき乗は入力し正規化します。べき乗する方法は、もう一つのエビデンスの単位は、仮説の乗法に与えられた重みが増加します。And conversely, having one less unit of evidence means that a hypothesis gets a fraction of its earlier weight. No hypothesis ever has zero or negative weight. Softmax then normalizes these weights, so that they add up to one, forming a valid probability distribution. (To get more intuition about the softmax function, check out the section on it in Michael Nielsen's book, complete with an interactive visualization.)
+ですが、しばしば最初にソフトマックスを考えることの助けになります。べき乗は入力し正規化します。べき乗する方法は、もう一つのエビデンスの単位は、仮説の乗法に与えられた重みが増加します。一方で、小さい単位のエビデンスの平均は、仮説が示す初期の重みの一部です。仮説はゼロもしくはマイナスの重みになることはありません。ソフトマックスはそれらの重みを正規化すると、それに加算し、有効な可能性の割り当てを形成します。（さらにソフトマックス関数について直感を得るには、Michael Nielsen氏の本の[セクション](http://neuralnetworksanddeeplearning.com/chap3.html#softmax)がおすすめです。双方向の視覚化を完全にします。）
+
+You can picture our softmax regression as looking something like the following, although with a lot more xs. For each output, we compute a weighted sum of the xs, add a bias, and then apply softmax.
