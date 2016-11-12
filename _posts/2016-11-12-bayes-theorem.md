@@ -1,9 +1,9 @@
 ---
 layout: blog
-title: TODO
+title: ナイーブベイズをキャッチアップするためにベイズの定理を復習する
 category: blog
-tags: [Facebook Bot, Ruby, チャットbot, sinatra]  
-summary: TODO
+tags: [機械学習,machine learning,ベイズの定理,naive bayes]  
+summary: 最近テキストを解析してごにょごにょする仕事をよくしているのですが、精度は高くないけど、
 author: aharada
 ---
 
