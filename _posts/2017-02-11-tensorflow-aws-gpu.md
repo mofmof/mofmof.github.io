@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: TensorFlowのチュートリアルをAWSのGPUインスタンスで動かそうとしたが失敗した
+title: TensorFlowのチュートリアルをAWSのGPUインスタンスで動かす
 category: blog
 tags: [機械学習,machine learning,TensorFlow,AWS,GPU]
 summary: TensorFlowでseq2seqを試してみたりしているのですが、やはりローカルPCのCPUでディープラーニングはつらすぎる
