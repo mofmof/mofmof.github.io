@@ -28,6 +28,10 @@ authors:
     name: "荒木 健"
     img_name_path: "/images/users/user.jpg"
     aboutme: "京都在住のエンジニア。自分の技術で世界にインパクトを与えるプロダクトを作りたい。仕事はRails、趣味は機械学習。Stanford University Machine Learning course certificate 取得"
+  karamage:
+    name: "柿本 匡章"
+    img_name_path: "/images/users/karamage.jpg"
+    aboutme: "こんにちは、からまげです。 ハイパーアプリクリエーターとしてスマホアプリやWebサービスを作る仕事をしています。 1978年9月福岡県生まれの九州男児です。趣味はアニメやゲームを嗜みます"
 disqus_shortname: ""
 copyright_year: "2015"
 google_analytics_code: "UA-44232253-15"
