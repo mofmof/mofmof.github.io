@@ -111,6 +111,7 @@ The question are of importance in the United States and rooms?
 
 どうしたら良いかわからないので、もうちょっと公式チュートリアルをちゃんと読んでみたら、「デフォルトのパラメータだとGPUのパワーがめっちゃ必要だから、そうじゃない環境ではこんな感じでやってみてね」的なことが買いてあった。とりあえず、そこらへんに買いてあったパラメータでまた流しておいて、しばらく放置してみる。
 
+```
 $ python translate.py --data_dir data --train_dir train --size=256 --num_layers=2 --steps_per_checkpoint=50
 
 略...
