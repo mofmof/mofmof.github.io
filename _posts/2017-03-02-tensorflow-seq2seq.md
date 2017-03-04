@@ -3,7 +3,7 @@ layout: blog
 title: TensorFlowのseq2seqで英仏語翻訳のチュートリアルを試す①
 category: blog
 tags: [機械学習,machine learning,TensorFlow,seq2seq,RNN]
-summary: TODO
+summary: 前々回あたりで、tensorflowのseq2seqで対話システムをつくる記事を書いたのだけれど、
 author: aharada
 ---
 
