@@ -1,15 +1,13 @@
 ---
 layout: blog
-title: TensorFlowのseq2seqで英仏語翻訳のチュートリアルを試す
+title: TensorFlowのseq2seqで英仏語翻訳のチュートリアルを試す①
 category: blog
 tags: [機械学習,machine learning,TensorFlow,seq2seq,RNN]
 summary: TODO
 author: aharada
 ---
 
-※この記事はまだ記入途中です。
-
-前々回あたりで、tensorflowのseq2seqで対話システムをつくる記事を書いたのだけれど、実はまだあんまり動く動いていなくてあれこれ試行錯誤しているところです。
+[前々回](http://tech.mof-mof.co.jp/blog/seq2seq.html)あたりで、tensorflowのseq2seqで対話システムをつくる記事を書いたのだけれど、実はまだあんまり動く動いていなくてあれこれ試行錯誤しているところです。
 
 学習処理はうまく走らせることが出来たし、収束している様子も確認したのですが、肝心の対話を動作させてみるとまるっきり使えないっていう状態でハマってまして、一旦初心に返って公式チュートリアルからやりなおそうと思って次第。
 
@@ -26,11 +24,14 @@ author: aharada
 
 ローカルでも実行出来るのですが、学習データ量がかなり大きいのでGPUがある端末で動かすのが良いかと思う。ぼくはAWSのGPUインスタンスで走らせることにします。
 
+AWSのGPUインスタンスで`tensorflow`が動かせるようにする設定はこちらのエントリ参照。
+
+[http://tech.mof-mof.co.jp/blog/tensorflow-aws-gpu.html](http://tech.mof-mof.co.jp/blog/tensorflow-aws-gpu.html)
+
 tensorflow/modelsリポジトリからcloneして必要な箇所だけ抜き出してコピーしておく。
 
 ```
 $ g clone git@github.com:tensorflow/models.git
-$ cd ..
 $ cp -r models/tutorials/rnn/translate .
 ```
 
@@ -39,10 +40,11 @@ $ cp -r models/tutorials/rnn/translate .
 ```
 $ cd translate
 $ mkdir data
-$ python translate.py --data_dir data
+$ mkdir train
+$ python translate.py --data_dir data --train_dir train
 ```
 
-こんな感じでコーパス作成処理を延々とやっていてまだ終わりそうもないので、一旦このへんで放置するかな。
+こんな感じでコーパス作成処理を延々とやっていてまだ終わりそうもないので、しばらく放置する。
 
 ```
 Creating vocabulary data/vocab40000.to from data data/giga-fren.release2.fixed.fr
@@ -56,7 +58,7 @@ Creating vocabulary data/vocab40000.to from data data/giga-fren.release2.fixed.f
 
 めっちゃ時間がかかるので朝まで放置してから見てみると`Error running translate.py - 'module' object has no attribute 'GRUCell'`って感じの例外で落ちてた。。orz
 
-原因はtensorflowのバージョン違いだったので、最新のtensorflowにアップデートします。GPUインスタンスを使っているのでtensorflow-gpuですね。
+原因はtensorflowのバージョン違いだったので、最新のtensorflow1.0にアップデートします。GPUインスタンスを使っているのでtensorflow-gpuですね。
 
 ```
 $ pip uninstall tensorflow-gpu
@@ -66,7 +68,7 @@ $ pip install tensorflow-gpu
 再び実行。またひたすら待たされるですよ。。
 
 ```
-$ python translate.py --data_dir data
+$ python translate.py --data_dir data --train_dir train
 ...
 Reading development and training data (limit: 0).
   reading data line 100000
@@ -115,4 +117,4 @@ ResourceExhaustedError (see above for traceback): OOM when allocating tensor wit
 
 またダメかー
 
-TODO
+今日はとりあえずここまで。続きは別のエントリに書きます。
