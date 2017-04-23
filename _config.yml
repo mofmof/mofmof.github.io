@@ -8,10 +8,10 @@ authors:
     name: "原田 敦"
     img_name_path: "/images/users/aharada.jpg"
     aboutme: "「作って人をしあわせにする」ことがミッション。多くの人を幸せにするプロダクトを世に送り出すことが、クリエイターにとって至上の幸せだと思ってます。デスマを憎んで人を憎まず。よりよいソフトウェアは、よりよいチームから生まれると思ってます。"
-  stachibana:
+  shwld:
     name: "橘 周世"
-    img_name_path: "/images/users/stachibana.jpg"
-    aboutme: "作るのとパソコンをいじるのが大好きなエンジニア。Webで誰もが気軽にお金や価値を生み出す世界を夢見ている。システムは使ってなんぼ。使う人誰もが最大の価値を生み出し、気持ち良く使ってもらえるシステムを常に目指していきます。"
+    img_name_path: "/images/users/shwld.jpg"
+    aboutme: "Electron, AWS, React, 機械学習, Dockerなどやってます。Electronで自分のためのノートとか作ってます"
   tishii:
     name: "石井 智康"
     img_name_path: "/images/users/tishii.jpg"
