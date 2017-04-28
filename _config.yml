@@ -32,6 +32,10 @@ authors:
     name: "柿本 匡章"
     img_name_path: "/images/users/karamage.jpg"
     aboutme: "こんにちは、からまげです。 ハイパーアプリクリエーターとしてスマホアプリやWebサービスを作る仕事をしています。 1978年9月福岡県生まれの九州男児です。趣味はアニメやゲームを嗜みます"
+  yamagata:
+    name: "山形 孝造"
+    img_name_path: "/images/users/yamagata.png"
+    aboutme: "アイデアを形にするのが好きなソフトウェアエンジニアです。音楽と料理が好きです。ギターとかベース弾いたり走ったりもします。"
 disqus_shortname: ""
 copyright_year: "2015"
 google_analytics_code: "UA-44232253-15"
@@ -45,4 +49,4 @@ kramdown:
 #redcarpet:
 #  extensions: [tables,autolink,strikethrough]
 
-#exclude: [vendor]
+exclude: [vendor]
