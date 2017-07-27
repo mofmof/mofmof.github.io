@@ -36,6 +36,10 @@ authors:
     name: "山形 孝造"
     img_name_path: "/images/users/yamagata.png"
     aboutme: "アイデアを形にするのが好きなソフトウェアエンジニアです。音楽と料理が好きです。ギターとかベース弾いたり走ったりもします。"
+  miyata:
+    name: "宮田 裕貴"
+    img_name_path: "/images/users/miyata.jpeg"
+    aboutme: "SIerからmofmofにジョイン。ハイレベルなエンジニアになるべく、日々修行中。趣味は筋トレ。映画「Fight Club」のタイラー・ダーテンのような鋼の肉体を手に入れたい。"
 disqus_shortname: ""
 copyright_year: "2015"
 google_analytics_code: "UA-44232253-15"
