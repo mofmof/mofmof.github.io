@@ -3,7 +3,7 @@ layout: blog
 title: Rails + Vue.js + Ajaxでボタンを押したらAPIにGETリクエストしてデータを画面に表示させる
 category: blog
 tags: [Vue.js, vue, Rails, Ruby on Rails]
-summary: TODO
+summary: 今回はRails作ったサーバサイドにAjaxでリクエストして、取得した値をViewに反映する、というような実践に寄せたサンプルをやってみる。
 author: aharada
 ---
 
