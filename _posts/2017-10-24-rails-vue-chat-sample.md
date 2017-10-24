@@ -156,7 +156,7 @@ http://localhost:3000/messages
 
 テーブルを表示するために、Vue側にサーバサイドから取得したデータを渡す必要があった。こちらを参考にしてやってみたけど、こうじゃない感ががが。
 
-https://qiita.com/hkusu/items/64cfd8bf4b4c8391e454
+[https://qiita.com/hkusu/items/64cfd8bf4b4c8391e454](https://qiita.com/hkusu/items/64cfd8bf4b4c8391e454)
 
 RailsからJS側に変数の値を渡すためのgemで[gon](https://github.com/gazay/gon)というのがあるみたいだけど時間が足りなかったので触らなかった。
 
