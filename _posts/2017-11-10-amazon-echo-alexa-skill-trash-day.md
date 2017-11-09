@@ -5,11 +5,14 @@ category: blog
 tags: [Amazon Echo, Alexa, アマゾンエコー]
 summary: 前回、Amazon Echo Alexaのカスタムスキルを作る入門をやってみました。今回は少しコードやインテントをいじってカスタマイズしてみます。
 author: aharada
+image: /images/blog/2017-11-10-amazon-echo-alexa-skill-trash-day/trash.png
 ---
 
-前回、Amazon Echo Alexaのカスタムスキルを作る入門をやってみました。今回は少しコードやインテントをいじってカスタマイズしてみます。
+前回、Amazon Echo Alexaのカスタムスキルを作る入門をやってみました。今回は少しコードやインテントをいじってカスタマイズして、Alexaちゃんにゴミ出しの曜日を教えてもらうスキルを開発してみます。
 
 [【Amazon Echo入門】Alexaちゃんに今日履いているパンツの色を答えさせる](/blog/amazon-echo-alexa-skill.html)
+
+![ゴミ出し](/images/blog/2017-11-10-amazon-echo-alexa-skill-trash-day/trash.png)
 
 ぼくはNode.jsよりPythonの方がいくらか得意なので、LambdaのPython3.6で開発してみます。
 
