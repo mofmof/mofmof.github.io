@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: 【Amazon Echo入門】Alexaちゃんに今日履いているパンツの色を答えさせる
+title: 【Amazon Echo入門#1】Alexaちゃんに今日履いているパンツの色を答えさせる
 category: blog
 tags: [Amazon Echo, Alexa, アマゾンエコー]
 summary: ただ発売を待っているだけもアレなので、先にスキル作ってみます。Alexaちゃんに今はいているパンツの色を聞いたら、何色か答えてくれるスキルを作る。

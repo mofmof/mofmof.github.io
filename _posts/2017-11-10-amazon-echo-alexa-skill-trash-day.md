@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: 【Amazon Echo入門】Alexaちゃんにゴミ出しの曜日を教えてもらう(Lambda Python3.6)
+title: 【Amazon Echo入門#2】Alexaちゃんにゴミ出しの曜日を教えてもらう(Lambda Python3.6)
 category: blog
 tags: [Amazon Echo, Alexa, アマゾンエコー]
 summary: 前回、Amazon Echo Alexaのカスタムスキルを作る入門をやってみました。今回は少しコードやインテントをいじってカスタマイズしてみます。
