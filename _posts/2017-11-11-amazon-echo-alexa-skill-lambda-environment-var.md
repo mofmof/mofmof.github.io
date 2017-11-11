@@ -12,6 +12,8 @@ image: /images/blog/2017-11-11-amazon-echo-alexa-skill-lambda-environment-var/un
 
 前回は、Amazon Echo Alexaちゃんにゴミ出しの曜日を教えてもらうスキルを開発しました。
 
+[【Amazon Echo入門#2】Alexaちゃんにゴミ出しの曜日を教えてもらう(Lambda Python3.6)](/blog/amazon-echo-alexa-skill-trash-day.html)
+
 今回はベタ打ちだったゴミ出しの曜日を環境変数化してみます。簡単だったので一瞬で終わった。
 
 ## Lambda側
