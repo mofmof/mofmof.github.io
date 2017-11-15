@@ -5,8 +5,10 @@ category: blog
 tags: [Amazon Echo, Alexa, アマゾンエコー]
 summary: 公開してみるとは言ったもののどこに公開されるんだろうか。日本語のスキルストアみたいのは見たことない。Amazon.comのスキルストアはあるみたいだけど。
 author: aharada
-image: /images/blog/2017-11-13-amazon-echo-alexa-skill-publish/global.png
+image: /images/blog/2017-11-13-amazon-echo-alexa-skill-publish/zawa512.png
 ---
+
+![ざわざわ](/images/blog/2017-11-13-amazon-echo-alexa-skill-publish/zawa512.png)
 
 前回の、[【Amazon Echo入門#4】Alexaちゃんにカイジの「ざわざわ」をやらせて焦燥感を演出するスキルを作る](/blog/amazon-echo-alexa-skill-kaiji.html)を実際に公開してみる。
 
