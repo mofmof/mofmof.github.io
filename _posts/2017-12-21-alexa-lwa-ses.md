@@ -3,9 +3,9 @@ layout: blog
 title: 【Amazon Echo入門#9】SESを使ってAlexaちゃんからAmazonアカウントのメールアドレスにメールを送る
 category: blog
 tags: [Amazon Echo, Alexa, アマゾンエコー, Link with Amazon, SES]
-summary: TODO
+summary: 前回、Login with Amazonを使って、Alexa側でメールアドレスを取得するところまでやりました。続いて、そのメールアドレスにメールを送信する実装をしてみます。
 author: aharada
-image: /images/blog/2017-12-20-alexa-link-with-amazon/...jpg
+image: /images/blog/2017-12-21-alexa-lwa-ses/verify-email.png
 ---
 
 前回、Login with Amazonを使って、Alexa側でメールアドレスを取得するところまでやりました。続いて、そのメールアドレスにメールを送信する実装をしてみます。
