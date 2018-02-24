@@ -44,7 +44,7 @@ model = gensim.models.KeyedVectors.load_word2vec_format('model.vec', binary=Fals
 print(model.similarity('国王', '王妃'))
 ```
 
-結果。まあそこそこ類似している。
+「国王」と「王妃」を比較した結果。まあそこそこ類似している。
 
 ```
 0.7415558764104452
@@ -127,31 +127,31 @@ Please Enter Hint Word: 女の子
 
 [http://hobbyjapan.co.jp/game?attachment_id=11580](http://hobbyjapan.co.jp/game?attachment_id=11580)
 
-アルプス
-コミック
-億万長者
-ルール
-飛行機
-ルート
-ライター
-南極
-パイロット
-草原
-靴下
-手袋
-モスクワ
-レーザー
-タップ
-氷
-カボチャ
-トリップ
-死
-パーツ
-イス
-雪だるま
-森
-レース
-ノート
+- アルプス
+- コミック
+- 億万長者
+- ルール
+- 飛行機
+- ルート
+- ライター
+- 南極
+- パイロット
+- 草原
+- 靴下
+- 手袋
+- モスクワ
+- レーザー
+- タップ
+- 氷
+- カボチャ
+- トリップ
+- 死
+- パーツ
+- イス
+- 雪だるま
+- 森
+- レース
+- ノート
 
 `entries`の部分だけを修正。
 
@@ -176,4 +176,4 @@ Please Enter Hint Word: 海外
 ## 人 vs word2vec
 実際にコードネームを人 vs word2vecでやってみます。
 
-(後ほど追記します)
+今手元にコードネームがないので後で追記します！
