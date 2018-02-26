@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: word2vecの人間でコードネーム(ボドゲ)を対戦してみたら大接戦だった
+title: word2vec対人間でコードネーム(ボドゲ)を対戦してみたら大接戦だった
 category: blog
 tags: [word2vec, 機械学習, fastText, python]
 summary: コードネームで遊んでいたある瞬間にあることに気付いてしまった。word2vecを使えば、人間よりも賢く正解を選べるのではないかということに。
