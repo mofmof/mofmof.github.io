@@ -8,6 +8,8 @@ author: aharada
 image: /images/blog/2018-10-23-cloud-automl-vision/labeling.png
 ---
 
+![ラベリング](/images/blog/2018-10-23-cloud-automl-vision/labeling.png)
+
 前回IBM Visual RecognitionとCloud AutoML Visionどっちにしようか検討していたのですが、Cloud AutoML Visionの方を使うことに決定したので、実際に試してみますです。
 
 [画像分類API、Google Cloud AutoML VisionとIBM Watson Visual Recognitionを比較してみる](/blog/image-classify-api.html)
