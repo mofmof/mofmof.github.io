@@ -1,6 +1,8 @@
 permalink: /:categories/:title.html
-url: "http://tech.mof-mof.co.jp/"
+url: "https://tech.mof-mof.co.jp/"
 blog_title: "もふもふ技術部"
+description: >
+  もふもふ技術部は、mofmof inc.のエンジニア達のテックブログです。試してみた技術のログをアップしていきます。
 author:
   name: HOGE
 authors:
