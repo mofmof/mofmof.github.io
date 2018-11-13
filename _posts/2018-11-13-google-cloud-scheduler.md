@@ -3,7 +3,7 @@ layout: blog
 title: ついにGCPでジョブスケジューリングが出来るようになったぞ！Google Cloud Schedulerを試してみる
 category: blog
 tags: [cron, crontab, job, Cloud Scheduler]
-summary: TODO
+summary: FirebaseのCloudFunctionは自前でサーバサイドを持たなくてもちょっとした処理ならhttps経由で実行したり出来るので便利
 author: aharada
 image: /images/blog/2018-11-13-google-cloud-scheduler/new.png
 ---
@@ -16,7 +16,7 @@ FirebaseのCloudFunctionは自前でサーバサイドを持たなくてもち�
 
 [Google Cloudがマネージドcronサービスを提供、自分でcronするより楽？](https://jp.techcrunch.com/2018/11/07/2018-11-06-google-launches-cloud-scheduler-a-managed-cron-service/)
 
-今回はFirebase経由で作ったCloudFunctionsを叩きたいので、GCPから見えるか念のためチェック。
+今回はFirebase経由で作ったCloudFunctidonsを叩きたいので、GCPから見えるか念のためチェック。
 
 [Google Cloud Platform](https://console.cloud.google.com/functions/list)
 
