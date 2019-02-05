@@ -5,12 +5,12 @@ category: blog
 tags: [Oculus Go, VR, Unity, Android]
 summary: 前回Oculus Goの開発環境を構築しました。続いてチュートリアルをやっていこうと思います。
 author: aharada
-image: /images/blog/2019-02-05-oculus-go-roll-a-ball/main.png
+image: /images/blog/2019-02-05-oculus-go-roll-a-ball/oculus-integration.png
 ---
 
 前回Oculus Goの開発環境を構築しました。続いてチュートリアルをやっていこうと思います。
 
-[Oculus Goの開発環境を構築しようとしたが頓挫した(Mac, Unity, Android) - もふもふ技術部](https://tech.mof-mof.co.jp/blog/oculus-go-development.html)
+[Oculus Goの開発環境を構築しようとしたが頓挫した(Mac, Unity, Android) - もふもふ技術部](/blog/oculus-go-development.html)
 
 Unity公式チュートリアルに玉転がしゲームがあります。書いてあるとおりにやれば普通に動くので、それが動いている状態から、Oculus Goに対応させる手順を書いていきます。
 
