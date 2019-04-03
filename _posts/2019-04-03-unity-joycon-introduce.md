@@ -84,7 +84,7 @@ Bluetoothでつなぐことができます。
 さて、実際に入力値を受け取ってみます。
 
 まずはお好みでC#スクリプトをおくScriptsフォルダを作成します。
-したらProject > CreateからC#Scriptを新規作成しましょう。名前は適当に ` JoyConSample ` とかで。これならたぶん他のnamespaceと被らないです。
+したらProject > CreateからC#Scriptを新規作成しましょう。名前は適当に`JoyConSample`とかで。これならたぶん他のnamespaceと被らないです。
 
 `JoyConSample.cs`の内容はこちら、丸コピペで大丈夫です。参考記事と一部相違がありますのでご注意。
 
