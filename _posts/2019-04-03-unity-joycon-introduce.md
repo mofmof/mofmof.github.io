@@ -9,15 +9,16 @@ image: /images/blog/2019-04-03-unity-joycon-introduce/output.png
 ---
 
 原田見習いの岩井です。師匠がUnityにお熱な傍らで、弟子の僕もここぞとばかりに時間をつぎ込みVR新規事業を模索していました。Unity超楽しい。自分のクリエイティビティの限界を感じる。
+
 とはいえUnityは超楽しいので、もうちょっとUnityの深淵に近づいてみたい。深淵に近づくとき、深淵もまた云々。
 
----
+<br>
 
 ## TL;DR
 
 複数回にわたってお届けする（予定）Joy-Conで遊ぶ編、今回はUnity世界にJoy-Conを召喚するところまでやってみます。
 
----
+<br>
 
 ## Joy-Conとは
 
@@ -25,7 +26,7 @@ image: /images/blog/2019-04-03-unity-joycon-introduce/output.png
 
 ![Joy-Con](/images/blog/2019-04-03-unity-joycon-introduce/joycon-official.png)
 
-https://www.nintendo.co.jp/hardware/switch/accessories/
+[公式の周辺機器紹介ページ](https://www.nintendo.co.jp/hardware/switch/accessories/)
 
 
 なんとこやつ、各種ボタンに加えて加速度センサーやジャイロセンサー、果てはモーションIRカメラまで搭載されていて、しかもUnityでそれらを簡単に受け取り・処理するための便利なライブラリもあると！
@@ -33,10 +34,13 @@ https://www.nintendo.co.jp/hardware/switch/accessories/
 
 ちなみに、こちらの記事を全体的に参考にさせていただいてます。
 
-http://baba-s.hatenablog.com/entry/2017/11/12/090000
+[【Unity】Nintendo Switch の Joy-Con のジャイロ・加速度・傾きの値を取得したり、振動させたりすることができる「JoyconLib」紹介](http://baba-s.hatenablog.com/entry/2017/11/12/090000)
 
+<br>
 
 ---
+
+<br>
 
 ## 環境を整える
 
@@ -61,18 +65,21 @@ http://baba-s.hatenablog.com/entry/2017/11/12/090000
 
     ![project-tree](/images/blog/2019-04-03-unity-joycon-introduce/project-tree.png)
 
+<br>
 
-## JoyConをmacに接続する
+## Joy-Conをmacに接続する
 
 Bluetoothでつなぐことができます。
 
-1. JoyConのシンクロボタンを長押しする
+1. Joy-Conのシンクロボタンを長押しする
 ![joycon-side](/images/blog/2019-04-03-unity-joycon-introduce/joycon-side.png)
 
 2. システム環境設定 > Bluetooth より、それぞれ接続しましょう
 ![joycon-connect](/images/blog/2019-04-03-unity-joycon-introduce/joycon-connect.png)
 
-## JoyCon疎通
+<br>
+
+## Joy-Con疎通
 
 さて、実際に入力値を受け取ってみます。
 
@@ -195,6 +202,8 @@ public class JoyConSample : MonoBehaviour
 }
 ```
 
+<br>
+
 ---
 
 相違箇所の解説をします。個々のコード解説は冒頭の参考記事に詳しく記されていますのでご覧になってください。
@@ -217,6 +226,8 @@ File > BuildSettings > ウィンドウ左下のPlayerSettings… > InspectorのO
 
 ---
 
+<br>
+
 ちょっと逸れましたが続きです。
 
 Joy-Conの入力を確かめるために、空のオブジェクトを作成しましょう。
@@ -226,6 +237,8 @@ Hierarchy上でCreateEmptyします。名前はすごくなんでもいいので
 できたら、それをInspectorに表示し、JoyConSampleスクリプトとJoyconManagerスクリプトをくっつけましょう。ドラッグ&ドロップです。
 
 ![object-scripts](/images/blog/2019-04-03-unity-joycon-introduce/object-scripts.png)
+
+<br>
 
 ## 完成
 
