@@ -43,9 +43,13 @@ image: /images/blog/2019-04-04-unity-joycon-play/sheep_shoot_sum.png
 
 で羊ちゃんが出現したので、こいつをジャイロセンサーで操作していきましょう。
 
+<br>
+
 まず、羊ちゃんの名前を`BeamSheep`にしておきます。安直。
 
-そしたら前回作成した｀JoyConSample.cs`を変更します。
+そしたら前回作成した`JoyConSample.cs`を変更します。
+
+<br>
 
 羊をスクリプト内で扱えるようにするところ
 
