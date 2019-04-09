@@ -18,7 +18,7 @@ TODOアプリを適当に作り、タスクの取得とタスクの検索をGrap
 
 コードは[こちら](https://github.com/yubachiri/todo)
 
-masterをベースにやっていきます。graphqlブランチが今回・次回分の作業が完了したものです。
+今回はmasterからブランチ切っていじっていきます。graphqlブランチが今回・次回分の作業が完了したものです。
 
 <br>
 
