@@ -208,7 +208,7 @@ graph_index.html.slim
 = javascript_pack_tag 'vue_apollo_sample'
 
 #mount_target
-  p = "{{message}}"
+  p = "{%raw%}{{message}}{%endraw%}"
 ```
 
 これで、今作ったページでVueが動作するようになっているはずです。/tasks/graphにhello, vueが表示されていればOK。
@@ -361,7 +361,7 @@ graph_index.html.slim
   b search:
   input[type="text" @input="search"]
   div[v-for="task in tasks" :key="task.id"]
-    = "{{task.title}}"
+    = "{%raw%}{{task.title}}{%endraw%}"
 ```
 
 すると、こうなる
