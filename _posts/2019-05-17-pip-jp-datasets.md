@@ -3,7 +3,7 @@ layout: blog
 title: pipで機械学習や自然言語処理用のデータをサクッと持ってきたいのでjp-datasetsというパッケージを作った
 category: blog
 tags: [機械学習,machine learning,pip,python,教師データ]
-summary: TODO
+summary: データをサクッと取ってきて機械学習とか自然言語処理に使えるパッケージが欲しかったので作ってみました。
 author: aharada
 # image:
 ---
