@@ -178,3 +178,25 @@ def load_data(seed=0):
 ソースコードはこちらから全て見ることが出来ます。
 
 [https://github.com/harada4atsushi/jp-datasets](https://github.com/harada4atsushi/jp-datasets)
+
+## 2019/05/20追記
+
+ローカルパスからインストールする分にはちゃんと動いたのだけど、GitHubから`pip install`すると`data`ディレクトリが展開されない問題が発生した。
+
+以下のように修正すると展開されるようになる。
+
+MANIFEST.in
+
+```
+recursive-include jpdatasets/data *
+```
+
+setup.py
+
+```
+setup(
+  ...
+  include_package_data = True,
+  ...
+)
+```
