@@ -5,7 +5,7 @@ category: blog
 tags: [Rails, Action text, ブログ]
 summary: Action text を試してみる。
 author: 　sakashita
-# image: 
+image: /images/blog/2019-06-24-rails6-actiontext/card-header.png
 ---
 
 Rails 6 は Beta版に続き、[rc1 が リリース](https://weblog.rubyonrails.org/2019/4/24/Rails-6-0-rc1-released/)されました。Rails 6 では action mailbox, multiple databases, parallel testing... など様々な新機能が実装されていますが、今回は action text を触ってみようと思います。
