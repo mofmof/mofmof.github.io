@@ -121,13 +121,17 @@ form の body を rich_text_area に変更します。
 
 ![Action text -- Form](/images/blog/2019-06-24-rails6-actiontext/action-text-form.png)
 
-Drag and drop による画像アップロードが良い感じです。何も実装していないですが、application.js で require している js と active storage がよしなにやってくれています。
+Drag and drop による画像アップロードが良い感じです。何も実装していないですが、application.js で require している js と active storage がよしなにやってくれているのだと思います。
+
 アンダーラインや文字色選択など、もうちょっと機能ほしいかなという感覚もありますが、最低限のことはできるようになっています。なお、`rich_text_area` で編集された内容はHTMLで保存されます。
+
 では、登録して詳細画面へ遷移して、内容を確認してみます。
 
 ![Action text -- Form](/images/blog/2019-06-24-rails6-actiontext/raw-html-on-show-page.png)
 
-おっとこれはまずいですね... 登録されたHTMLコードがそのまま表示されてしまっています。```html_safe``` すれば行けるだろうと思って試したのですが、```Blog.body``` は ```ActionText::RichText``` オブジェクトなので、html_safe できません。```Blog.body.body``` で登録されたHTMLを取得することができるので html_safe による編集内容の反映が可能ですが、画像が取得できなくなってしまっています。。
+おっとこれはまずいですね... 登録されたHTMLコードがそのまま表示されてしまっています。
+
+```html_safe``` すれば行けるだろうと思って試したのですが、```Blog.body``` は ```ActionText::RichText``` オブジェクトなので、html_safe できません。```Blog.body.body``` で登録されたHTMLを取得することができるので html_safe による編集内容の反映が可能ですが、画像が取得できなくなってしまっています。。
 
 ここで少し [action_text](https://github.com/rails/actiontext/blob/archive/app/models/action_text/rich_text.rb) の実装を覗いてみます。
 
@@ -155,7 +159,7 @@ end
 
 画像は ```:embeds``` として has_many_attached されていますね。とすれば、```ActiveStorage::Blob.service.path_for(Blog.first.body.embeds.first.key)``` で画像のパスを取得することはわかりますが、やりたいことから遠ざかってしまうので別の回避策を考えます。
 
-とりあえず "action text tutorial" で検索してトップに出てきた [Introducing Action Text for Raisl 6](https://weblog.rubyonrails.org/2018/10/3/introducing-action-text-for-rails-6/) を見てみると、 (DHHの動画)[https://www.youtube.com/watch?v=HJZ9TnKrt7Q&feature=youtu.be] を見るようにとのことだったので見てみます。
+とりあえず "action text tutorial" で検索してトップに出てきた [Introducing Action Text for Raisl 6](https://weblog.rubyonrails.org/2018/10/3/introducing-action-text-for-rails-6/) を見てみると、 [DHHの動画](https://www.youtube.com/watch?v=HJZ9TnKrt7Q&feature=youtu.be) を見るようにとのことだったので見てみます。
 
 9:30 ぐらいで紹介される ```show.html.erb``` の実装は、何もひねることなく下記のようになっていました。
 
@@ -195,7 +199,9 @@ gem 'image_processing', '~> 1.2'
 無事、LGTMのトムが表示されました。
 
 ## 所感
-slim と image_processing の未インストールを除けば、かなり容易に実装できました。スタイル当てればそれなりの形にはなりそうです。個人的には markdown で問題ないのですが、設定・実装不要で画像アップロードまでやってくれるのは良いなと思いました。
+slim と image_processing の未インストールを除けば、かなり容易に実装できました。
+
+スタイル当てればそれなりの形にはなりそうです。個人的には markdown で問題ないのですが、設定・実装不要で画像アップロードまでやってくれるのは良いなと思いました。
 （今回はローカルでの動作確認までを対象とするので、s3の設定等については ActiveStorage 関連の記事を参照ください。）
 
 次回は action mailbox を触ってみようと思います。
