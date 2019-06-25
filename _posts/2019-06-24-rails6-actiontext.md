@@ -5,7 +5,7 @@ category: blog
 tags: [Rails, Action text, ブログ]
 summary: Action text を試してみる。
 author: 　sakashita
-# image: 
+image: /images/blog/2019-06-24-rails6-actiontext/card-header.png
 ---
 
 Rails 6 は Beta版に続き、[rc1 が リリース](https://weblog.rubyonrails.org/2019/4/24/Rails-6-0-rc1-released/)されました。Rails 6 では action mailbox, multiple databases, parallel testing... など様々な新機能が実装されていますが、今回は action text を触ってみようと思います。
@@ -14,6 +14,7 @@ Rails 6 は Beta版に続き、[rc1 が リリース](https://weblog.rubyonrails
 
 記事を書くために Action text を触ってみた感じになっていますが、WYSIWYG を実装したいと思ったことが事の発端でした。はじめは [Floara](https://www.froala.com/wysiwyg-editor) を試していて、かなりいい感じだったんですが、有料なのでやっぱりなあと思い、せっかくなので Action text を試そうと思った次第です。
 
+## Rails 6 インストールとセットアップ
 前置きが長くなりましたがここから実装していきます。
 まずはセットアップから。（`Ruby >= 2.5.0` なので、必要に応じてインストールと変更を。）
 
@@ -60,7 +61,7 @@ $ rails s
 
 担当するプロジェクトでは `slim` を使うことが多いので、ここでも `slim` を使用してみます。
 
-```Gemfile
+```rb:Gemfile
 ...
 gem 'slim-rails'
 ```
@@ -79,7 +80,7 @@ $ rails db:migrate
 
 root を `blog#index` に変更します。
 
-```config/routes.rb
+```rb:config/routes.rb
 Rails.application.routes.draw do
 +  root 'blogs#index'
   resources :blogs
@@ -87,7 +88,10 @@ Rails.application.routes.draw do
 end
 ```
 
-続いて、Action text をインストールし、
+## Action text の実装
+ここから Action text の実装に移ります。
+
+まずはAction text をインストールし、
 
 ```
 $ rails action_text:install
@@ -96,7 +100,7 @@ $ rails db:migrate
 
 Blog の body を has_rich_text して、
 
-```app/models/blog.rb
+```rb:app/models/blog.rb
 class Blog < ApplicationRecord
   has_rich_text :body
 end
@@ -104,7 +108,7 @@ end
 
 form の body を rich_text_area に変更します。
 
-```app/views/blogs/_form.html.slim
+```rb:app/views/blogs/_form.html.slim
 ...
   .field
     = f.label :body
@@ -127,7 +131,7 @@ Drag and drop による画像アップロードが良い感じです。何も実
 
 ここで少し [action_text](https://github.com/rails/actiontext/blob/archive/app/models/action_text/rich_text.rb) の実装を覗いてみます。
 
-```actiontext/app/models/action_text/rich_text.rb
+```rb:actiontext/app/models/action_text/rich_text.rb
 class ActionText::RichText < ActiveRecord::Base
   self.table_name = "action_text_rich_texts"
 
@@ -155,20 +159,20 @@ end
 
 9:30 ぐらいで紹介される `show.html.erb` の実装は、何もひねることなく下記のようになっていました。
 
-```
+```rb
 <%= @post.content %>
 ```
 
 んー、では erb なら行けるのか。
 
-```app/views/blogs/show.html
+```rb:app/views/blogs/show.html
 p
   strong Body:
 -  = @blog.body.body.html_safe
 +  = render partial: 'blog_body', locals: { body: @blog.body }
 ```
 
-```app/views/blogs/_blog_body.html.erb
+```rb:app/views/blogs/_blog_body.html.erb
 <%= body %>
 ```
 
@@ -178,7 +182,7 @@ p
 
 画像が表示されない理由はログに出ていたので、指示通り `image_processing` を追加して `bundle install` します。
 
-```Gemfile
+```rb:Gemfile
 ...
 gem 'slim-rails'
 gem 'image_processing', '~> 1.2'
@@ -190,6 +194,7 @@ gem 'image_processing', '~> 1.2'
 
 無事、LGTMのトムが表示されました。
 
+## 所感
 slim と image_processing の未インストールを除けば、かなり容易に実装できました。スタイル当てればそれなりの形にはなりそうです。個人的には markdown で問題ないのですが、設定・実装不要で画像アップロードまでやってくれるのは良いなと思いました。
 （今回はローカルでの動作確認までを対象とするので、s3の設定等については ActiveStorage 関連の記事を参照ください。）
 
