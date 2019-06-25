@@ -16,7 +16,7 @@ Rails 6 は Beta版に続き、[rc1 が リリース](https://weblog.rubyonrails
 
 ## Rails 6 インストールとセットアップ
 前置きが長くなりましたがここから実装していきます。
-まずはセットアップから。（`Ruby >= 2.5.0` なので、必要に応じてインストールと変更を。）
+まずはセットアップから。（```Ruby >= 2.5.0``` なので、必要に応じてインストールと変更を。）
 
 ```
 $ ruby -v
@@ -36,7 +36,7 @@ Rails 6.0.0.rc1
 ```
 （ちなみにですが、rc は Release Candidate の略だということを初めて知りました。）
 
-続いて `rails new` します。オプションは必要に応じて変更してください。
+続いて ```rails new``` します。オプションは必要に応じて変更してください。
 
 ```
 $ rails new action_text --skip-coffee --skip-turbolinks --database=postgresql
@@ -59,7 +59,7 @@ $ rails s
 
 ![Yay! You're on Rails!](/images/blog/2019-06-24-rails6-actiontext/yay-youre-on-rails.png)
 
-担当するプロジェクトでは `slim` を使うことが多いので、ここでも `slim` を使用してみます。
+担当するプロジェクトでは ```slim``` を使うことが多いので、ここでも ```slim``` を使用してみます。
 
 ```rb:Gemfile
 ...
@@ -78,7 +78,7 @@ $ rails g scaffold Blog title:string body:text
 $ rails db:migrate
 ```
 
-root を `blog#index` に変更します。
+root を ```blog#index``` に変更します。
 
 ```rb:config/routes.rb
 Rails.application.routes.draw do
@@ -127,7 +127,7 @@ Drag and drop による画像アップロードが良い感じです。何も実
 
 ![Action text -- Form](/images/blog/2019-06-24-rails6-actiontext/raw-html-on-show-page.png)
 
-おっとこれはまずいですね... 登録されたHTMLコードがそのまま表示されてしまっています。`html_safe` すれば行けるだろうと思って試したのですが、`Blog.body` は `ActionText::RichText` オブジェクトなので、html_safe できません。`Blog.body.body` で登録されたHTMLを取得することができるので html_safe による編集内容の反映が可能ですが、画像が取得できなくなってしまっています。。
+おっとこれはまずいですね... 登録されたHTMLコードがそのまま表示されてしまっています。```html_safe``` すれば行けるだろうと思って試したのですが、```Blog.body``` は ```ActionText::RichText``` オブジェクトなので、html_safe できません。```Blog.body.body``` で登録されたHTMLを取得することができるので html_safe による編集内容の反映が可能ですが、画像が取得できなくなってしまっています。。
 
 ここで少し [action_text](https://github.com/rails/actiontext/blob/archive/app/models/action_text/rich_text.rb) の実装を覗いてみます。
 
@@ -153,11 +153,11 @@ class ActionText::RichText < ActiveRecord::Base
 end
 ```
 
-画像は `:embeds` として has_many_attached されていますね。とすれば、`ActiveStorage::Blob.service.path_for(Blog.first.body.embeds.first.key)` で画像のパスを取得することはわかりますが、やりたいことから遠ざかってしまうので別の回避策を考えます。
+画像は ```:embeds``` として has_many_attached されていますね。とすれば、```ActiveStorage::Blob.service.path_for(Blog.first.body.embeds.first.key)``` で画像のパスを取得することはわかりますが、やりたいことから遠ざかってしまうので別の回避策を考えます。
 
 とりあえず "action text tutorial" で検索してトップに出てきた [Introducing Action Text for Raisl 6](https://weblog.rubyonrails.org/2018/10/3/introducing-action-text-for-rails-6/) を見てみると、 (DHHの動画)[https://www.youtube.com/watch?v=HJZ9TnKrt7Q&feature=youtu.be] を見るようにとのことだったので見てみます。
 
-9:30 ぐらいで紹介される `show.html.erb` の実装は、何もひねることなく下記のようになっていました。
+9:30 ぐらいで紹介される ```show.html.erb``` の実装は、何もひねることなく下記のようになっていました。
 
 ```rb
 <%= @post.content %>
@@ -180,7 +180,7 @@ p
 
 あ、うまく行ってますね。画像は表示されてないですが...。やはり slim が未対応だっただけのようです。[確認](https://rubygems.org/gems/slim-rails/versions/3.2.0)したら slimは2018年10月が最終更新になっていたので、正式リリースまでには対応されることを期待し、今回は rich_text の箇所だけ erb で行きます。
 
-画像が表示されない理由はログに出ていたので、指示通り `image_processing` を追加して `bundle install` します。
+画像が表示されない理由はログに出ていたので、指示通り ```image_processing``` を追加して ```bundle install``` します。
 
 ```rb:Gemfile
 ...
