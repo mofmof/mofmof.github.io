@@ -4,7 +4,7 @@ title: Rails 6 と Action text を使ってみる
 category: blog
 tags: [Rails, Action text, ブログ]
 summary: Action text を試してみる。
-author: 　sakashita
+author: sakashita
 image: /images/blog/2019-06-24-rails6-actiontext/card-header.png
 ---
 
