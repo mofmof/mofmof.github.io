@@ -70,8 +70,7 @@ gem 'slim-rails'
 $ bundle install
 ```
 
-ここから action text を実装していきます。
-まずは scaffold から。
+Action text の実装に移る前に、Blog を scaffold しておきます。
 
 ```
 $ rails g scaffold Blog title:string body:text
@@ -129,7 +128,7 @@ Drag and drop による画像アップロードが良い感じです。何も実
 
 ![Action text -- Form](/images/blog/2019-06-24-rails6-actiontext/raw-html-on-show-page.png)
 
-おっとこれはまずいですね... 登録されたHTMLコードがそのまま表示されてしまっています。
+おっとこれはまずいですね... 登録されたHTMLがそのまま表示されてしまっています。
 
 ```html_safe``` すれば行けるだろうと思って試したのですが、```Blog.body``` は ```ActionText::RichText``` オブジェクトなので、html_safe できません。```Blog.body.body``` で登録されたHTMLを取得することができるので html_safe による編集内容の反映が可能ですが、画像が取得できなくなってしまっています。。
 
