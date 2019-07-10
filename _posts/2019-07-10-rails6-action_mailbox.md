@@ -250,7 +250,7 @@ class CommentRepliesMailbox < ApplicationMailbox
 end
 ```
 
-ここでいきなり登場した `mail` オブジェクトは、
+ここでいきなり登場した ```mail``` オブジェクトは、
 [こちらの gem](https://github.com/mikel/mail) でオブジェクト化した
 ```InboundMail```（ActionMailbox で受信したメール）です。(ActionMailbox 左記の gem をラップしている。)
 
@@ -366,7 +366,7 @@ end
 <%= link_to 'Back', discussions_path %>
 ```
 
-サーバを起動し、http://localhost:3000 をブラウザで開いてユーザ登録を行います。
+サーバを起動し、[http://localhost:3000](http://localhost:3000) をブラウザで開いてユーザ登録を行います。
 
 ![User 1 created](/images/blog/2019-07-10-action-mailbox/user-1-created.png)
 
@@ -383,7 +383,7 @@ end
 ということで ```reply-1@example.com``` 宛に、各ユーザからメールを送信する必要があります。
 Rails 6 では開発用にメール作成画面を提供してくれているので、そこで作業して送信します。
 
-http://localhost:3000/rails/conductor/action_mailbox/inbound_emails/new
+[http://localhost:3000/rails/conductor/action_mailbox/inbound_emails/new](http://localhost:3000/rails/conductor/action_mailbox/inbound_emails/new)
 
 From, To, Body だけ入力して送信してみます。
 
@@ -418,4 +418,4 @@ Mario からも適当に好きなゲームをコメントさせ、これら２�
 今後機会があれば試しておきたいと思います。
 
 ### Source
-https://github.com/Lynns0416/action_mailbox_demo
+[https://github.com/Lynns0416/action_mailbox_demo](https://github.com/Lynns0416/action_mailbox_demo)
