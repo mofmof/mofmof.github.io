@@ -5,7 +5,7 @@ category: blog
 tags: [Rails, Action Mailbox, ブログ]
 summary: Action Mailbox の基本的な実装方法など
 author: sakashita
-image: /images/blog/2019-07-09-rails6-action_mailbox/card-header.png
+image: /images/blog/2019-07-10-rails6-action_mailbox/card-header.png
 ---
 
 [前回の Action text](/blog/rails6-actiontext.html) に続き、今回は Action Mailbox を使ってなにか試してみようと思います。
@@ -368,15 +368,15 @@ end
 
 サーバを起動し、http://localhost:3000 をブラウザで開いてユーザ登録を行います。
 
-![User 1 created](/images/blog/2019-07-09-action-mailbox/user-1-created.png)
+![User 1 created](/images/blog/2019-07-10-action-mailbox/user-1-created.png)
 
 少し寂しいので Mario を追加します。
 
-![users-index](/images/blog/2019-07-09-action-mailbox/users-index.png)
+![users-index](/images/blog/2019-07-10-action-mailbox/users-index.png)
 
 続いてディスカッションを追加します。議題は何でも良いので、「好きなゲーム」にしておきます。
 
-![create discussion](/images/blog/2019-07-09-action-mailbox/create-discussion.png)
+![create discussion](/images/blog/2019-07-10-action-mailbox/create-discussion.png)
 
 メールの返信によって、このページに Comments(今回の場合はゲームのタイトル) が追加されていくイメージです。
 
@@ -387,23 +387,23 @@ http://localhost:3000/rails/conductor/action_mailbox/inbound_emails/new
 
 From, To, Body だけ入力して送信してみます。
 
-![mail form](/images/blog/2019-07-09-action-mailbox/mail-form.png)
+![mail form](/images/blog/2019-07-10-action-mailbox/mail-form.png)
 
 送信すると、送信したメールの詳細画面へ遷移します。Full email source をクリックすると、
 送られたメールの詳細を確認する事ができます。
 
-![mail show](/images/blog/2019-07-09-action-mailbox/mail-show.png)
+![mail show](/images/blog/2019-07-10-action-mailbox/mail-show.png)
 
 Back to all inbound emails を押下すると、メール一覧画面が表示されます。
 delivered になっているので、無事に送信されたようです。
 
-![mail index](/images/blog/2019-07-09-action-mailbox/mail-index.png)
+![mail index](/images/blog/2019-07-10-action-mailbox/mail-index.png)
 
 ちなみにメール送信は ```ActiveJob``` で実行されます。
 
 Mario からも適当に好きなゲームをコメントさせ、これら２つのコメントが /discussions/1 に表示されていることを確認します。
 
-![comments](/images/blog/2019-07-09-action-mailbox/comments.png)
+![comments](/images/blog/2019-07-10-action-mailbox/comments.png)
 
 ## 所感
 文章は少し長くなってしまいましたが、実装自体は比較的容易でした。
@@ -416,3 +416,6 @@ Mario からも適当に好きなゲームをコメントさせ、これら２�
 
 今回触れなかった、HTMLメールや添付ファイルの扱いについては良い使い道がありそうな気がするので、
 今後機会があれば試しておきたいと思います。
+
+### Source
+https://github.com/Lynns0416/action_mailbox_demo
