@@ -290,7 +290,7 @@ class CommentRepliesMailbox < ApplicationMailbox
     recepient = mail.recipients.find{ |r| REGEX.match?(r) }
     recepient[REGEX, 1]
   end
-end 
+end
 ```
 
 一気にいきましたが、これで完了です。
