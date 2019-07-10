@@ -5,7 +5,7 @@ category: blog
 tags: [Rails, Action Mailbox, ブログ]
 summary: Action Mailbox の基本的な実装方法など
 author: sakashita
-image: /images/blog/2019-07-10-rails6-action_mailbox/card-header.png
+image: /images/blog/2019-07-10-action-mailbox/card-header.png
 ---
 
 [前回の Action text](/blog/rails6-actiontext.html) に続き、今回は Action Mailbox を使ってなにか試してみようと思います。
@@ -17,9 +17,9 @@ image: /images/blog/2019-07-10-rails6-action_mailbox/card-header.png
 ということだそうなのですが、どういうことなのかよくわからなかったのでユースケースを調べてみました。
 
 - Discussion などのページに、メールでコメントを残す
-  -> 記事でこの内容を書いていきます
+  - 記事でこの内容を書いていきます
 - 問い合わせフォームから送られたメールを自動返信する
-  -> 例えば在庫状況に関する問い合わせメールを、商品番号などから DB に問い合わせて自動返信する、など
+  - 例えば在庫状況に関する問い合わせメールを、商品番号などから DB に問い合わせて自動返信する、など
 
 ユースケース自体は理解できるのですが、そもそもメールを返信する機会自体が少なくなってきているし、
 開発にしても今はメールにURLを添付してブラウザやアプリ上から操作や確認させるのが一般的だと思うので、
@@ -31,7 +31,7 @@ Rails 側で受信したメールを保存できるのは使い道がありそ�
 ですがとりあえず試してみようということで、ここから実装していきます。
 今回のやること・やらないことは以下です。
 
-#### やること
+### やること
 - メールの返信で Rails アプリ上にコメントを追加していく機能を実装
 - 以下のモデルを作成
   - User (Email, Name)
@@ -39,14 +39,14 @@ Rails 側で受信したメールを保存できるのは使い道がありそ�
   - Comment (Body)
 - Comment は User, Discussion に参照を持ち、誰がどの議論へコメントしたかがわかるようにしたい    
 
-#### やらないこと
+### やらないこと
 - Mailgun, SendGrid などとのつなぎ込み（別で機会があれば記事に書きます）
 - Test
 
 ちょっとこの段階では何ができるのかイメージしづらい感じになってしまいすみません。
 実装が進むにつれて、やりたいことが見えてくる感じかと思います。
 
-## Rails 6 インストールとセットアップ
+# Rails 6 インストールとセットアップ
 こちらの内容は、[前回の記事](/blog/rails6-actiontext.html) とほとんど同じですので、詳しい説明はそちらを参照ください。
 
 コマンドのみ記載していきます。
@@ -80,22 +80,22 @@ Created database 'action_mailbox_test
 
 今回は ```erb``` のまま実装してきます。
 
-## 各モデルの作成
-####  User
+### 各モデルの作成
+###  User
 Action Mailbox 以外の内容が多くならないようにするため、devise は使わず簡単にします。
 
 ```shell
 $ rails g scaffold User email name
 ```
 
-#### Discussion
+### Discussion
 コメントの対象となるディスカッション（お題）を設定するモデル。title と content をもたせます。
 
 ```shell
 $ rails g scaffold Discussion title:string content:text
 ```
 
-#### Comment
+### Comment
 メールの返信によって追加される、ディスカッションへのコメント。ディスカッションとユーザに属するよう参照を設定します。
 
 コメントはディスカッションの show に表示させるだけになるので、model だけの作成となります。
@@ -110,7 +110,7 @@ $ rails g model Comment body:string discussion:references user:references
 $ rails db:migrate
 ```
 
-#### リレーション追加
+### リレーション追加
 Discussion モデルに以下の記述を追加します。
 
 ```ruby
@@ -121,8 +121,8 @@ end
 
 以上で下準備完了です！
 
-## Action Mailbox の実装
-### 1. インストール
+# Action Mailbox の実装
+## 1. インストール
 ここから Action Mailbox の実装に移ります。
 
 まずはAction Mailbox をインストールします。
@@ -214,7 +214,7 @@ class ApplicationMailbox < ActionMailbox::Base
 end
 ```
 
-### 2. Mailbox の作成と振り分け
+## 2. Mailbox の作成と振り分け
 次に、CommentReplies Mailbox を作成します。
 
 ```shell
@@ -261,7 +261,7 @@ Action Mailbox の実装を確認すると、[このあたり](https://github.co
 
 デバッガなどで mail オブジェクトの中身を確認してみるのも良いかもしれません。
 
-### 3. Mailbox 内で discussion への comment 追加処理を実装
+## 3. Mailbox 内で discussion への comment 追加処理を実装
 
 次に実装したいことは Discussion の取得と、メールのBodyをコメント化することです。
 
@@ -320,7 +320,7 @@ class ApplicationMailbox < ActionMailbox::Base
 end
 ```
 
-### 4. メール送信とコメントの確認
+## 4. メール送信とコメントの確認
 
 実際に動かして様子を見てみます。
 
@@ -405,7 +405,7 @@ Mario からも適当に好きなゲームをコメントさせ、これら２�
 
 ![comments](/images/blog/2019-07-10-action-mailbox/comments.png)
 
-## 所感
+# 所感
 文章は少し長くなってしまいましたが、実装自体は比較的容易でした。
 
 しかしやはり、使い所がイマイチピンと来てないところがあるので、今後の案件や
