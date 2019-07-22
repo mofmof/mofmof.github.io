@@ -28,13 +28,13 @@ mofmofの新規事業立ち上げ第二弾で、SwiftでARを扱ったのでAR�
 これを書いてる私はmojave、iOS12、Xcode10みたいな感じでやりました。
 対応機種はこんな感じ。公式スクショしてきました。
 
-![](https://paper-attachments.dropbox.com/s_608E106655241054B7B14C820904B246C117D529E2AAC74796682A01ACCEF9A9_1563686104285_+2019-07-21+14.13.57.png)
+![](/images/blog/2019-07-22-ar-introduction/ar-devices.png)
 
 
 詳しくはこちら(2019/07/26) https://www.apple.com/jp/ios/augmented-reality/
 
 
-## 手を動かす前に！ ~15秒座学~
+## 手を動かす前に！ 15秒座学
 
 今回主に触るものの概要説明です。
 
@@ -74,7 +74,7 @@ mofmofの新規事業立ち上げ第二弾で、SwiftでARを扱ったのでAR�
 
 参考:
 
-![](https://paper-attachments.dropbox.com/s_608E106655241054B7B14C820904B246C117D529E2AAC74796682A01ACCEF9A9_1563687018993_+2019-07-21+14.30.07.png)
+![](/images/blog/2019-07-22-ar-introduction/info-plist.png)
 
 
 準備OK！
@@ -85,7 +85,7 @@ mofmofの新規事業立ち上げ第二弾で、SwiftでARを扱ったのでAR�
 最初に、ARを表示するためのViewを設置します。
 ARKit SceneKit Viewを置き、広げておきましょう。ちなみにSceneKitは3D用、SpriteKitは2D用という違いがあります。
 
-![](https://paper-attachments.dropbox.com/s_608E106655241054B7B14C820904B246C117D529E2AAC74796682A01ACCEF9A9_1563687293455_+2019-07-21+14.34.05.png)
+![](/images/blog/2019-07-22-ar-introduction/arkit-scene-view.png)
 
 
 したらコードで触るために、なんやかんやいじっていきます。
@@ -171,10 +171,7 @@ ARKitはARSessionを通して諸々を制御するらしいので、arSceneView�
 
 まずはTap Gesture Recognizerの追加。
 
-
-![](https://paper-attachments.dropbox.com/s_608E106655241054B7B14C820904B246C117D529E2AAC74796682A01ACCEF9A9_1563716686387_+2019-07-21+22.28.13.png)
-
-
+![](/images/blog/2019-07-22-ar-introduction/gesture-recognizer.png)
 
 Actionで繋ぎます。
 
@@ -221,7 +218,7 @@ SCNBoxなSCNNodeを作って、ARSceneに追加しているところですね。
 
 カメラの位置と向き&位置情報サービスからなんとかします。
 
-位置情報の取得下ごしらえ。
+### 位置情報の取得下ごしらえ。
 
 やることは三つあります。
 
@@ -230,9 +227,7 @@ SCNBoxなSCNNodeを作って、ARSceneに追加しているところですね。
 
 targets → generalの下部ですね。
 
-![](https://paper-attachments.dropbox.com/s_608E106655241054B7B14C820904B246C117D529E2AAC74796682A01ACCEF9A9_1563719871498_+2019-07-21+23.36.56.png)
-
-
+![](/images/blog/2019-07-22-ar-introduction/cl-fw.png)
 
 2. CoreLocationをimportします。
 3. delegateを設定
