@@ -5,7 +5,7 @@ category: blog
 tags: [Swift, iOS, AR, ARKit, SceneKit]
 summary: ホットなxRの中でも、ARはスマホさえあれば簡単に体験できるカジュアルさが最高です。カメラを通してちょっと違った世界を覗けるこのエキサイティングな技術に触れてみませんか。
 author: iwai
-image: /images/blog/2019-07-22-ar-introduction/ar-image.png
+image: /images/blog/2019-07-22-ar-introduction/ar_image.png
 ---
 
 mofmofの新規事業立ち上げ第二弾で、SwiftでARを扱ったのでAR入門＆ちょびっとだけ得た知見を書き殴ろうかと思います。
@@ -22,18 +22,20 @@ mofmofの新規事業立ち上げ第二弾で、SwiftでARを扱ったのでAR�
 
 ## 環境
 
-新しめのmac
-新しめのiPhone
-新しめのXcode
+- 新しめのmac
+- 新しめのiPhone
+- 新しめのXcode
 
 これを書いてる私はmojave、iOS12、Xcode10みたいな感じでやりました。
+
 対応機種はこんな感じ。公式スクショしてきました。
 
 ![](/images/blog/2019-07-22-ar-introduction/ar-devices.png)
 
 
-詳しくはこちら(2019/07/26) https://www.apple.com/jp/ios/augmented-reality/
+詳しくは[こちら](https://www.apple.com/jp/ios/augmented-reality/) (2019/07/22)
 
+<br>
 
 ## 手を動かす前に！ 15秒座学
 
@@ -47,6 +49,7 @@ mofmofの新規事業立ち上げ第二弾で、SwiftでARを扱ったのでAR�
     - オブジェクトの位置とか回転とか、物理演算担当
     - ARKitとこいつとで現実世界にオブジェクトがあるような表現を頑張っている
 
+<br>
 
 ## プロジェクト準備
 
@@ -61,16 +64,18 @@ mofmofの新規事業立ち上げ第二弾で、SwiftでARを扱ったのでAR�
 
 1. カメラの利用許可は必須なので、設定しておきます
     1. Info.plistを開きます
-    2. 一番上に表示されている “Information Property List”にカーソルをのせると右端に出てくるプラスマークをクリックします
-    3. Privacy - Camera Usage Descriptionを選択します
+    2. 一番上に表示されている `Information Property List`にカーソルをのせると右端に出てくるプラスマークをクリックします
+    3. `Privacy - Camera Usage Description`を選択します
     4. Valueの欄に「AR機能を利用するためにカメラを使用します。」と書いておきます
-2. なくても実機デバッグは可能ですが、Required device capabilitiesを設定しておきます
-    1. Required device capabilitiesにカーソルをのせると表示されるプラスマークをクリック
+
+2. なくても実機デバッグは可能ですが、`Required device capabilities`を設定しておきます
+    1. `Required device capabilities`にカーソルをのせると表示されるプラスマークをクリック
     2. 追加されたItemのValueに”arkit”と入力
-    3. 補足: Device Capbilityの役割とか https://developer.apple.com/library/archive/documentation/DeviceInformation/Reference/iOSDeviceCompatibility/DeviceCompatibilityMatrix/DeviceCompatibilityMatrix.html
+    3. 補足: [Device Capbilityの役割とか](https://developer.apple.com/library/archive/documentation/DeviceInformation/Reference/iOSDeviceCompatibility/DeviceCompatibilityMatrix/DeviceCompatibilityMatrix.html)
+
 3. (任意) 北にオブジェクトを置くときはiOSの位置情報サービスを利用するので、利用許可の設定をします
-    1. 一番上に表示されている “Information Property List”にカーソルをのせると右端に出てくるプラスマークをクリックします
-    2. Location When In Use Usage Descriptionを選択します
+    1. 一番上に表示されている `Information Property List`にカーソルをのせると右端に出てくるプラスマークをクリックします
+    2. `Location When In Use Usage Description`を選択します
     3. Valueの欄に「北を検出するために位置情報を使用します。」と書いておきます
 
 参考:
@@ -80,6 +85,7 @@ mofmofの新規事業立ち上げ第二弾で、SwiftでARを扱ったのでAR�
 
 準備OK！
 
+<br>
 
 ## ARに触れていく編 特徴点検出まで
 
@@ -113,7 +119,7 @@ class ViewController: UIViewController {
 }
 ```
 
-ARKitはARSessionを通して諸々を制御するらしいので、arSceneViewにsessionを設定します。ARKitが特徴点を見つけてくれるところを眺めるためにデバッグオプションも追加しておきます。
+ARKitはARSessionを通して諸々を制御するらしいので、`arSceneView`にsessionを設定します。ARKitが特徴点を見つけてくれるところを眺めるためにデバッグオプションも追加しておきます。
 
 ```
 class ViewController: UIViewController {
@@ -133,7 +139,7 @@ class ViewController: UIViewController {
 }
 ```
 
-で、セッションはviewDidApperで走らせます。ついでにセッションを止めるのも書いておきます。
+で、セッションは`viewDidApper`で走らせます。ついでにセッションを止めるのも書いておきます。
 
 ```
 class ViewController: UIViewController {
@@ -157,20 +163,20 @@ class ViewController: UIViewController {
 
 `ARWorldTrackingConfiguration`はARSessionのトラッキングオプションです。どんな情報を元にトラッキングするかということが設定できます。オプションはいくつかありますが、これがベーシックなものかと思います。
 
-詳しくはこちら https://developer.apple.com/documentation/arkit/arconfiguration
+詳しくは[こちら](https://developer.apple.com/documentation/arkit/arconfiguration)
 
 ここまでやればとりあえず動くようにはなっていると思います。
 実機繋いでRunしてみましょう。
 
 よーし、次はオブジェクト設置ですね。
 
-
+<br>
 
 ## ARに触れいていく編 オブジェクトの設置
 
 画面をタップしたらオブジェクトが設置されるようにしていきます。
 
-まずはTap Gesture Recognizerの追加。
+まずは`Tap Gesture Recognizer`の追加。
 
 ![](/images/blog/2019-07-22-ar-introduction/gesture-recognizer.png)
 
@@ -202,7 +208,7 @@ SCNBoxなSCNNodeを作って、ARSceneに追加しているところですね。
 位置設定周りは、
 
 1. カメラの座標を取得
-2. z方向に-1、つまり前方に1mを表現したSCNVector3を作成
+2. z方向に-1、つまり前方に1mを表現した`SCNVector3`を作成
 3. カメラの座標を、上記で準備した相対位置を加味しつつAR世界の絶対座標に変換
 
 ということを行なっています。結果、カメラの前方1mの位置が指定できているわけです。
@@ -210,6 +216,7 @@ SCNBoxなSCNNodeを作って、ARSceneに追加しているところですね。
 
 ここまでできたら動かしてみましょう。画面をタップした際に、豆腐みたいなオブジェクトが現れるはずです。
 
+<br>
 
 ## ARに触れいていく編 北に置きたい
 
@@ -224,14 +231,14 @@ SCNBoxなSCNNodeを作って、ARSceneに追加しているところですね。
 やることは三つあります。
 
 
-1. 位置情報フレームワークを追加します
+1.位置情報フレームワークを追加します
 
 targets → generalの下部ですね。
 
 ![](/images/blog/2019-07-22-ar-introduction/cl-fw.png)
 
-2. CoreLocationをimportします。
-3. delegateを設定
+2.CoreLocationをimportします。
+3.delegateを設定
 
 ```
 import UIKit
@@ -246,7 +253,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate { // 追加
 
 準備OK。
 
-動かす
+<br>
+
+### 動かす
 
 ```
 override func viewDidLoad() {
@@ -343,6 +352,7 @@ AR内の表現は右手座標系となっており、回転も右ねじです。
 
 というわけで、画面をタップすると北に豆腐が現れるようになったと思います。完成！
 
+<br>
 
 ## いかがでしたか。
 
