@@ -99,60 +99,60 @@ ARKit SceneKit Viewを置き、広げておきましょう。ちなみにSceneKi
 をします。
 
 ```
-    import UIKit
-    import ARKit // 追加
+import UIKit
+import ARKit // 追加
+
+class ViewController: UIViewController {
+
+    @IBOutlet weak var arSceneView: ARSCNView! // control + ドラッグで追加
     
-    class ViewController: UIViewController {
-    
-        @IBOutlet weak var arSceneView: ARSCNView! // control + ドラッグで追加
-        
-        override func viewDidLoad() {
-            super.viewDidLoad()
-        }
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
+
+}
 ```
 
 ARKitはARSessionを通して諸々を制御するらしいので、arSceneViewにsessionを設定します。ARKitが特徴点を見つけてくれるところを眺めるためにデバッグオプションも追加しておきます。
 
 ```
-    class ViewController: UIViewController {
+class ViewController: UIViewController {
+
+    @IBOutlet weak var arSceneView: ARSCNView!
     
-        @IBOutlet weak var arSceneView: ARSCNView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // 以下追加
+        arSceneView.session = ARSession()
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
-    
-            // 以下追加
-            arSceneView.session = ARSession()
-            
-            arSceneView.showsStatistics = true
-            arSceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
-        }
-    
+        arSceneView.showsStatistics = true
+        arSceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
     }
+
+}
 ```
 
 で、セッションはviewDidApperで走らせます。ついでにセッションを止めるのも書いておきます。
 
 ```
-    class ViewController: UIViewController {
-        override func viewDidLoad() {
-            略
-        }
-        
-        // 追加
-        override func viewDidAppear(_ animated: Bool) {
-            let configuration = ARWorldTrackingConfiguration()
-            arSceneView.session.run(configuration)
-        }
-    
-        // 追加
-        override func viewWillDisappear(_ animated: Bool) {
-            arSceneView.session.pause()
-        }
-    
+class ViewController: UIViewController {
+    override func viewDidLoad() {
+        略
     }
+    
+    // 追加
+    override func viewDidAppear(_ animated: Bool) {
+        let configuration = ARWorldTrackingConfiguration()
+        arSceneView.session.run(configuration)
+    }
+
+    // 追加
+    override func viewWillDisappear(_ animated: Bool) {
+        arSceneView.session.pause()
+    }
+
+}
 ```
 
 `ARWorldTrackingConfiguration`はARSessionのトラッキングオプションです。どんな情報を元にトラッキングするかということが設定できます。オプションはいくつかありますが、これがベーシックなものかと思います。
@@ -177,24 +177,24 @@ ARKitはARSessionを通して諸々を制御するらしいので、arSceneView�
 Actionで繋ぎます。
 
 ```
-    @IBAction func handleTap(_ sender: Any) {
-    }
+@IBAction func handleTap(_ sender: Any) {
+}
 ```
 
 中身はこんな感じにしましょう。
 
 ```
-    @IBAction func handleTap(_ sender: Any) {
-        guard let camera = arSceneView.pointOfView else { return } // 1
-    
-        let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
-        let boxNode = SCNNode(geometry: box)
-    
-        let relativePosition = SCNVector3(x: 0, y: 0, z: -1) // 2
-        boxNode.position = camera.convertPosition(relativePosition, to: nil) // 3
-    
-        arSceneView.scene.rootNode.addChildNode(boxNode)
-    }
+@IBAction func handleTap(_ sender: Any) {
+    guard let camera = arSceneView.pointOfView else { return } // 1
+
+    let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
+    let boxNode = SCNNode(geometry: box)
+
+    let relativePosition = SCNVector3(x: 0, y: 0, z: -1) // 2
+    boxNode.position = camera.convertPosition(relativePosition, to: nil) // 3
+
+    arSceneView.scene.rootNode.addChildNode(boxNode)
+}
 ```
 
 SCNBoxなSCNNodeを作って、ARSceneに追加しているところですね。
@@ -234,12 +234,12 @@ targets → generalの下部ですね。
 3. delegateを設定
 
 ```
-    import UIKit
-    import ARKit
-    import CoreLocation // 追加
-    
-    class ViewController: UIViewController, CLLocationManagerDelegate { // 追加
-        let locationManager = CLLocationManager()
+import UIKit
+import ARKit
+import CoreLocation // 追加
+
+class ViewController: UIViewController, CLLocationManagerDelegate { // 追加
+    let locationManager = CLLocationManager()
 ```
 
 ついでにlocationManagerのインスタンスを作っておきます。
@@ -249,6 +249,42 @@ targets → generalの下部ですね。
 動かす
 
 ```
+override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    arSceneView.session = ARSession()
+    
+    arSceneView.showsStatistics = true
+    arSceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+    
+    // 追加
+    locationManager.delegate = self
+    locationManager.startUpdatingHeading()
+}
+```
+
+viewDidLoadで方角取得を起こします。
+そして、方角がupdateされるたびに呼ばれるメソッドはこちら。
+
+```
+func locationManager(_ manager:CLLocationManager,didUpdateHeading newHeading:CLHeading)
+```
+
+ここで他の箇所にも色々と変更が入ります。全容はこちら。
+変更箇所にはコメントを入れてあります。
+
+```
+import UIKit
+import ARKit
+import CoreLocation
+
+class ViewController: UIViewController, CLLocationManagerDelegate {
+    let locationManager = CLLocationManager()
+    var isRotationInitialized = false // フラグを追加
+    var northRotate: SCNVector4? // 北方向を保持する変数を追加
+
+    @IBOutlet weak var arSceneView: ARSCNView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -257,81 +293,45 @@ targets → generalの下部ですね。
         arSceneView.showsStatistics = true
         arSceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
         
-        // 追加
         locationManager.delegate = self
         locationManager.startUpdatingHeading()
     }
-```
-
-viewDidLoadで方角取得を起こします。
-そして、方角がupdateされるたびに呼ばれるメソッドはこちら。
-
-```
-    func locationManager(_ manager:CLLocationManager,didUpdateHeading newHeading:CLHeading)
-```
-
-ここで他の箇所にも色々と変更が入ります。全容はこちら。
-変更箇所にはコメントを入れてあります。
-
-```
-    import UIKit
-    import ARKit
-    import CoreLocation
     
-    class ViewController: UIViewController, CLLocationManagerDelegate {
-        let locationManager = CLLocationManager()
-        var isRotationInitialized = false // フラグを追加
-        var northRotate: SCNVector4? // 北方向を保持する変数を追加
-    
-        @IBOutlet weak var arSceneView: ARSCNView!
-        
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            
-            arSceneView.session = ARSession()
-            
-            arSceneView.showsStatistics = true
-            arSceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
-            
-            locationManager.delegate = self
-            locationManager.startUpdatingHeading()
-        }
-        
-        override func viewDidAppear(_ animated: Bool) {
-            let configuration = ARWorldTrackingConfiguration()
-            arSceneView.session.run(configuration)
-        }
-        
-        override func viewWillDisappear(_ animated: Bool) {
-            arSceneView.session.pause()
-        }
-        
-        @IBAction func handleTap(_ sender: Any) {
-            guard let camera = arSceneView.pointOfView else { return }
-            guard let rotation = northRotate else { return } // northRotateの初期化を確認
-    
-            let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
-            let boxNode = SCNNode(geometry: box)
-    
-            let relativePosition = SCNVector3(x: 0, y: 0, z: -1)
-            camera.rotation = rotation // カメラの回転を北に向ける
-            boxNode.position = camera.convertPosition(relativePosition, to: nil)
-    
-            arSceneView.scene.rootNode.addChildNode(boxNode)
-        }
-        
-        func locationManager(_ manager:CLLocationManager,didUpdateHeading newHeading:CLHeading){
-            let nowHeading = newHeading.magneticHeading // 現在向いている方向を0度~359度で取得
-            
-            if !isRotationInitialized {
-                // (x軸, y軸, z軸, 回転)で回転を表現
-                // 回転はラジアンで受け付けるため度数を変換している
-                northRotate = SCNVector4(0, 1, 0, (nowHeading / 180) * Double.pi)
-                isRotationInitialized = true
-            }
-        }
-        
+    override func viewDidAppear(_ animated: Bool) {
+        let configuration = ARWorldTrackingConfiguration()
+        arSceneView.session.run(configuration)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        arSceneView.session.pause()
+    }
+    
+    @IBAction func handleTap(_ sender: Any) {
+        guard let camera = arSceneView.pointOfView else { return }
+        guard let rotation = northRotate else { return } // northRotateの初期化を確認
+
+        let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
+        let boxNode = SCNNode(geometry: box)
+
+        let relativePosition = SCNVector3(x: 0, y: 0, z: -1)
+        camera.rotation = rotation // カメラの回転を北に向ける
+        boxNode.position = camera.convertPosition(relativePosition, to: nil)
+
+        arSceneView.scene.rootNode.addChildNode(boxNode)
+    }
+    
+    func locationManager(_ manager:CLLocationManager,didUpdateHeading newHeading:CLHeading){
+        let nowHeading = newHeading.magneticHeading // 現在向いている方向を0度~359度で取得
+        
+        if !isRotationInitialized {
+            // (x軸, y軸, z軸, 回転)で回転を表現
+            // 回転はラジアンで受け付けるため度数を変換している
+            northRotate = SCNVector4(0, 1, 0, (nowHeading / 180) * Double.pi)
+            isRotationInitialized = true
+        }
+    }
+    
+}
 ```
 
 微妙にややこしいです。
