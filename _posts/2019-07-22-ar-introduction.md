@@ -16,8 +16,9 @@ mofmofの新規事業立ち上げ第二弾で、SwiftでARを扱ったのでAR�
 - ARKitとSceneKitがざっくり動く
 - 北にオブジェクト置く
 
-まっさらな状態からここまでやります
+まっさらな状態からここまでやります。完成形はこんな感じ。
 
+![](/images/blog/2019-07-22-ar-introduction/goal.jpg)
 
 ## 環境
 
