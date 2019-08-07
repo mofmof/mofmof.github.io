@@ -2,14 +2,14 @@
 layout: blog
 title: Gofのデザインパターン、Adapterパターンの使いどころ
 category: blog
-tags: [デザインパターン,Ruby,Adapterパターン]  
+tags: [デザインパターン,Ruby,Adapterパターン]
 summary: 今「増補改訂版Java言語で学ぶデザインパターン入門」というGoFのデザインパターンについて説明している入門書を読んでいます。
 author: aharada
 ---
 
 今「増補改訂版Java言語で学ぶデザインパターン入門」というGoFのデザインパターンについて説明している入門書を読んでいます。
 
-<iframe src="http://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=FFFFFF&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=redhornet09-22&o=9&p=8&l=as1&m=amazon&f=ifr&ref=qf_sp_asin_til&asins=4797327030" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=FFFFFF&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=redhornet09-22&o=9&p=8&l=as1&m=amazon&f=ifr&ref=qf_sp_asin_til&asins=4797327030" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
 
 昔ぼくがまだ若手の時に、Javaをメインにやっていて、そのときGoFのデザインパターンの勉強をしたことがあるのですが、当時はパッパラパーでした。
 
@@ -23,7 +23,7 @@ author: aharada
 ```
 class Messenger
   def deliver(body, to, from)
-    puts "deliver! body: #{body}, to: #{to}, from: #{from}"  
+    puts "deliver! body: #{body}, to: #{to}, from: #{from}"
   end
 end
 
