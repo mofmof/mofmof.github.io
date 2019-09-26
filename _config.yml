@@ -50,6 +50,10 @@ authors:
     name: "坂下 凜"
     img_name_path: "/images/users/sakashita.jpg"
     aboutme: "JavaからRubyに転向したエンジニアです。最近はGo/Swift/Reactにトライしています。趣味はサッカーと読書です。"
+  sugie:
+    name: "杉江 崇文"
+    img_name_path: "/images/users/sugie.jpg"
+    aboutme: "子育て中エンジニアです。趣味はドラムとギター。DTMで何か作りたいけど未着手です。最近は早く寝て早く起きることにトライしてます。"
 disqus_shortname: ""
 copyright_year: "2015"
 google_analytics_code: "UA-44232253-15"
