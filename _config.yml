@@ -54,6 +54,10 @@ authors:
     name: "杉江 崇文"
     img_name_path: "/images/users/sugie.jpg"
     aboutme: "子育て中エンジニアです。趣味はドラムとギター。DTMで何か作りたいけど未着手です。最近は早く寝て早く起きることにトライしてます。"
+  terapasta:
+    name: "寺山 弘晃"
+    img_name_path: "/images/users/terapasta"
+    aboutme: "ユーザーに近いところで開発したいエンジニアです。金融系のシステム開発からWeb系にジョブチェンジしました。マイブームはNuxt.jsとGraphQLとぐるぐるもんじゃです。"
 disqus_shortname: ""
 copyright_year: "2015"
 google_analytics_code: "UA-44232253-15"
