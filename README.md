@@ -71,3 +71,16 @@ PRにデフォルトで新規投稿のチェックが入っています。入っ
 「書いてみようかな」「こんなこと試した」「こんなことがあった」「これ役立つかも」何でも良いです！
 
 ぜひ、書いてみてください！
+
+## コードを書くにあたって
+
+マークダウン内ではLiquidの処理の関係で、マスタッシュは表示されません。Rawを使って回避してください。
+
+参考: https://shopify.github.io/liquid/tags/raw/
+
+```
+{% raw %}
+  In Handlebars, {{ this }} will be HTML-escaped, but
+  {{{ that }}} will not.
+{% endraw %}
+```
