@@ -124,7 +124,7 @@ pages/index.vue
   <div>
     <ul>
       <li v-for="post in posts">
-        {{ post.fields.name }}
+        {%raw%}{{ post.fields.name }}{%endraw%}
       </li>
     </ul>
   </div>
