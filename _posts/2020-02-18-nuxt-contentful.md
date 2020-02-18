@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: Nuxt.js + Contentful でサクッとペラペラな静的サイトをつくる ローカルで動作するところまで
+title: Nuxt.js + Contentful でサクッとブログのベース的なものをつくる ローカルで動作するところまで
 category: blog
 tags: [Vue.js, Nuxt.js, Contentful]
 summary: オウンドメディアを立ち上げるにあたっていい感じの技術を選定したく、試しました。ほほうという感じ。
@@ -21,7 +21,7 @@ nuxt公式: https://ja.nuxtjs.org/
 ## TL;DR
 - プロジェクトつくります
 - contentfulにコンテンツをおきます
-- コンテンツを埋め込んだ静的サイトを生成します
+- コンテンツを埋め込みます
 - ローカルで結果を確認します
 
 10分くらいあればできそう。結果は下記に置いてあります。
