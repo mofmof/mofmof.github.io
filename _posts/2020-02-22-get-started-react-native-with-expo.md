@@ -161,7 +161,7 @@ QRコードをiPhoneで読み込んでみると「使用可能なデータがみ
 
 動いたーー！
 
-![アプリ画面](/images/blog/2020-02-22-get-started-react-native-with-expo/blank.png)
+![アプリ画面](/images/blog/2020-02-22-get-started-react-native-with-expo/blank.PNG)
 
 
 ## iOSネイティブのCollectionView(タイル)みたいの作る
@@ -198,7 +198,7 @@ export default class App extends Component {
 
 出来たー！！
 
-![グリッドUI](/images/blog/2020-02-22-get-started-react-native-with-expo/grid.png)
+![グリッドUI](/images/blog/2020-02-22-get-started-react-native-with-expo/grid.PNG)
 
 ## タイル型のグリッドにラーメン画像を並べてみる
 
