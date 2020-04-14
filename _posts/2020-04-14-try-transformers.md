@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: huggingfaceのtransformersのexampleでNER(named entity recognition)してみる
+title: huggingfaceのtransformersでNER(named entity recognition)を試してみる
 category: blog
 tags: [huggingface, Machine Learning, NER, 固有表現抽出]
 summary: 最近、BERTで学習済みの日本語言語モデルが使えるようになったらしいhugginfaceのtransformers。自然言語処理界隈では主流になっているらしい。
