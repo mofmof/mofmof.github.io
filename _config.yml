@@ -58,6 +58,10 @@ authors:
     name: "寺山 弘晃"
     img_name_path: "/images/users/terapasta.jpg"
     aboutme: "ユーザーに近いところで開発したいエンジニアです。金融系のシステム開発からWeb系にジョブチェンジしました。マイブームはNuxt.jsとGraphQLとぐるぐるもんじゃです。"
+  akito-n:
+    name: "永井 瑛人"
+    img_name_path: "/images/users/nagai.jpg"
+    aboutme: "理想を形にする手伝いをしたいエンジニアです。React, Vue、Swiftが楽しいです。Quest買ったのでこそこそ何か作ってます"
 disqus_shortname: ""
 copyright_year: "2015"
 google_analytics_code: "UA-44232253-15"
