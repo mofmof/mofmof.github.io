@@ -169,6 +169,7 @@ Vue.prototype.$cable = cable;
 
 続いてTheChat.vueです。（名前適当につけました。）
 
+{% raw %}
 ```
 <template>
   <div>
@@ -207,6 +208,7 @@ export default {
 </script>
 
 ```
+{% endraw %}
 
 createdでMessageChannelを取得しています。speakした時に
 
@@ -233,9 +235,11 @@ received: data => {
 
 template側では
 
+{% raw %}
 ```
 <li v-for="(message, index) in messages" :key="index">{{ message.message || "中身ないよ" }}</li>
 ```
+{% endraw %}
 この部分で表示が行われます（message.messageってなんかアレですね）
 
 
